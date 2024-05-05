@@ -20,5 +20,27 @@ for x in a:
         print(x, end=' ')
 print()
 
-for x in enumerate(a): # tuple 구조로 (index, 값)으로 나옴
+for x in enumerate(a): # tuple 구조(index, 값)로 으로 나옴
     print(x)
+
+b = (1, 2, 3, 4, 5) # 튜플이 만들어진다.
+print(b[0])
+# b[0] = 7 # 튜플은 리스트와 다르게 값을 변경할 수 없다.
+
+for x in enumerate(a): # tuple 구조(index, 값)로 으로 나옴
+    print(x[0], x[1])
+print()
+
+for index, value in enumerate(a): # 편하게 뽑아쓰기
+    print(index, value)
+print()
+
+if all(60 > x for x in a): # a리스트에 for문을 도는데 조건 검사 후 모두가 참이면 true를 반환한다. 하나라도 false면 false
+    print("Yes")
+else:
+    print("No")
+
+if any(15 > x for x in a): # a리스트에 for문을 도는데 조건 검사 후 하나라도 참이면  true를 반환. 모두 false여야 false
+    print("Yes")
+else:
+    print("No")
