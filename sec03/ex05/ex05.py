@@ -10,7 +10,7 @@ sys.stdin = open("in5.txt", "rt")
 n, m = map(int, input().split())
 a = list(map(int, input().split()))
 
-# 강사 풀이 속도 훨씬 빠름
+# 강사 풀이 - 연산 속도 훨씬 빠름
 lt = 0
 rt = 1
 tot = a[0]
