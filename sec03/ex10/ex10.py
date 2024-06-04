@@ -2,7 +2,9 @@
 스도쿠 검사
 '''
 import sys
+
 sys.stdin = open("in5.txt", "rt")
+
 
 ## 강사 코드 설명
 def check(a):
@@ -24,6 +26,7 @@ def check(a):
             if sum(ch3) != 9:
                 return False
     return True
+
 
 a = [list(map(int, input().split())) for _ in range(9)]
 if check(a):
@@ -55,4 +58,3 @@ for i in range(3):
 
 print(res)
 '''
-
