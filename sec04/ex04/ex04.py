@@ -8,11 +8,49 @@ C마리의 말을 N개의 마구간에 배치했을 때 가장 가까운 두 말
 # 입력 설명
 첫 줄에 자연수 N(3<=N<=200,000)과 C(2<=C<=N)이 공백을 사이에 두고 주어집니다.
 둘째 줄부터 N개의 줄에 걸쳐 마구간의 좌표 xi(0<=xi<=1,000,000,000)가 한 줄에 하나씩 주어집니다.
+
+# 출력 설명
+첫 줄에 가장 가까운 두 말의 최대 거리를 출력하세요.
 """
 
 import sys
 sys.stdin = open("in5.txt", "rt")
 
+# 재풀이
+n, c = map(int, input().split())
+cabinets = []
+
+for _ in range(n):
+    cabinets.append(int(input()))
+cabinets.sort()
+
+def checker(mid):
+    cnt = 1
+    endPoint = cabinets[0]
+    for i in range(1, n):
+        if (cabinets[i] - endPoint) >= mid:
+            cnt += 1
+            endPoint = cabinets[i]
+    return cnt
+
+
+lt = 1
+rt = max(cabinets)
+res = 0
+
+while lt <= rt:
+    mid = (lt + rt) // 2 # 5
+    if checker(mid) >= c:
+        lt = mid + 1
+        if res <= mid:
+            res = mid
+    else:
+        rt = mid - 1
+
+print(res)
+
+
+"""
 n, c = map(int, input().split()) # n = 마구간 갯수, c = 말 마리수
 Line = []
 for _ in range(n):
@@ -39,7 +77,7 @@ while lt <= rt:
         rt = mid - 1
 
 print(res)
-
+"""
 
 
 
