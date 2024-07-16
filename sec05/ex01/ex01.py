@@ -18,7 +18,28 @@
 import sys
 sys.stdin = open("in5.txt")
 
-# 다시 풀어보기!!
+# 재풀이!!
+num, m = map(int, input().split())
+num = list(map(int, str(num)))
+# print(num)
+
+stack = []
+
+for x in num:
+    for j in range(len(stack)):
+        if len(stack) and m > 0 and stack[-1] < x:
+            stack.pop()
+            m -= 1
+    stack.append(x)
+
+if m != 0:
+    stack = stack[:-m]
+
+res = ''.join(map(str, stack))
+print(res)
+
+
+"""
 num, m = map(int, input().split())
 num = list(map(int, str(num)))
 # print(num)
@@ -36,6 +57,7 @@ if m != 0:
 
 res = ''.join(map(str, stack))
 print(res)
+"""
 
 
 
