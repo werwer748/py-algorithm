@@ -5,48 +5,59 @@ round_half_even: 4.500을 round로 감싸면 5가아닌 4가 나옴(짝수쪽으
 앞이 짝수면 5를 버리고 앞이 홀수면 올라가는듯?
 a=4.500
 print(round(a)) # 6
-'''
-# a = 66.5
-# a = a + 0.5 # 0.5를 더해서 소수점이 0.5이상인경우 1이 더해지게끔한다.
-# a = int(a) # int로 변환시켜 소수점을 떨어낸다.
-# print(a)
 
-'''대표값'''
+a = 66.5
+a = a + 0.5 # 0.5를 더해서 소수점이 0.5이상인경우 1이 더해지게끔한다.
+a = int(a) # int로 변환시켜 소수점을 떨어낸다.
+print(a)
+'''
+
+
+
+
+
+'''
+대표값
+N명의 학생의 수학점수가 주어집니다. 
+N명의 학생들의 평균(소수 첫째자리 반올림)을 구하고,
+N명의 학생 중 평균에 가장 가까운 학생은 몇 번째 학생인지 출력하는 프로그램을 작성하세요.
+평균과 가장 가까운 점수가 여러 개일 경우 먼저 점수가 높은 학생의 번호를 답으로 하고, 높
+은 점수를 가진 학생이 여러 명일 경우 그 중 학생번호가 빠른 학생의 번호를 답으로 합니다.
+'''
 import sys
 sys.stdin = open("in1.txt", "rt")
 
-'''
-# 내 풀이 - 오류 수정 적용
+
 n = int(input())
-points = list(map(int, input().split()))
-avg = (sum(points) / n) + 0.5
-avg = int(avg)
+scores = list(map(int, input().split()))
 
-temp = max(points)
-student = 0
-for x in enumerate(points):
-    absTemp = abs(avg - x[1])
-    if temp == absTemp:
-        if x[1] > points[student]:
-            student = x[0]
-    if temp > absTemp:
-        student = x[0]
-        temp = absTemp
+avg = int((sum(scores) / n) + 0.5)
+tmp = float('inf')
+res = 0
+score = 0
 
-studentNum = student + 1
-print(avg, studentNum)
+for (i, x) in enumerate(scores):
+    diff = abs(avg - x)
+
+    if diff < tmp:
+        tmp = diff
+        res = i + 1
+        score = x
+    elif diff == tmp and score < x:
+        res = i + 1
+        score = x
+
+
+print(avg, res, sep=" ")
+
 '''
-
-
-# 강사풀이 - 오류 수정 적용
 n = int(input())
 a = list(map(int, input().split()))
+ave = int(sum(a)/n + 0.5)
+min = 2147000000
 
-ave = (sum(a)/n) + 0.5
-ave = int(ave)
-min = 2147000000 # 4바이트 최대 정수
 for idx, x in enumerate(a):
-    tmp = abs(x-ave)
+    tmp = abs(x - ave)
     if tmp < min:
         min = tmp
         score = x
@@ -55,8 +66,5 @@ for idx, x in enumerate(a):
         if x > score:
             score = x
             res = idx + 1
-
 print(ave, res)
-
-
-
+'''

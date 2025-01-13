@@ -6,68 +6,36 @@
 import sys
 sys.stdin = open("in5.txt", "rt")
 
-'''
-# 내 풀이
-n, m = map(int,input().split())
-allSumList = []
-for x in range(1, n + 1):
-    for y in range(1, m + 1):
-        allSumList.append(x + y)
 
-setAllSumList = list(set(allSumList))
+# 내풀이
+n, m = map(int, input().split())
+sum_list = list(0 for i in range(n + m + 1))
 
-count = list(range(len(setAllSumList)))
-for i, s in enumerate(setAllSumList):
-    count[i] = 0
-    for a in allSumList:
-        if s == a:
-            count[i] = count[i] + 1
+for i in range(1, n + 1):
+    for j in range(1, m + 1):
+        sum_list[i + j] += 1
 
-maxCnt = max(count)
+max_num = max(sum_list)
 
-result = []
-for i, c in enumerate(count):
-    if c == maxCnt:
-        result.append(setAllSumList[i])
-
-result.sort()
-for r in result:
-    print(r, end=' ')
-print()
-'''
+for i, x in enumerate(sum_list):
+    if x == max_num:
+        print(i, end=" ")
 
 '''
-# 강사 풀이
-n, m = map(int,input().split())
+# 강사풀이
+n, m = map(int, input().split())
+cnt = [0] * (n + m + 3)
+max = -2147000000
 
-cnt = [0] * (n + m + 2) #? 두눈 최고수 합으로 미리 카운팅 리스트 범위를 잡는다(range에서 +1이붙으니까 여유분(2)을 조금 더 준다.)
-max = -2147000000 # 가장작은값으로 초기화
 for i in range(1, n + 1):
     for j in range(1, m + 1):
         cnt[i + j] += 1
 
-for i in range(n+m+1):
+for i in range(n + m + 1):
     if cnt[i] > max:
         max = cnt[i]
 
-for i in range(n+m+1):
+for i in range(n + m + 1):
     if cnt[i] == max:
         print(i, end=' ')
 '''
-
-# 내풀이 최적화 해보기
-n, m = map(int,input().split())
-
-maxRange = n + m + 1
-cnt = [0] * maxRange
-
-for x in range(1, n + 1):
-    for y in range(1, m + 1):
-        cnt[x + y] += 1
-
-maxCnt = max(cnt)
-for i in range(maxRange):
-    if cnt[i] == maxCnt:
-        print(i, end=' ')
-
-
