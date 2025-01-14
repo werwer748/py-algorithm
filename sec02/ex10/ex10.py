@@ -16,27 +16,22 @@ sys.stdin = open('in5.txt', 'rt')
 '''
 # 내 풀이
 n = int(input())
-a = list(map(int, input().split()))
+ox = list(map(int, input().split()))
+res = 0
+point = 1
 
-result = [0] * n
-for i, x in enumerate(a):
-    if i != 0 and a[i] != 0:
-        result[i] = result[i - 1] + 1
-    elif i != 0 and a[i] == 0:
-        result[i] = 0
-    elif i == 0 and a[i] == 1:
-        result[i] = 1
-    elif i == 0 and a[i] == 0:
-        result[i] = 0
-
-sumResult = sum(result)
-print(sumResult)
+for x in ox:
+    if x == 0:
+        point = 1
+    else:
+        res += point
+        point += 1
+print(res)
 '''
 
 # 강사 풀이
 n = int(input())
 a = list(map(int, input().split()))
-
 sum = 0
 cnt = 0
 
@@ -46,5 +41,4 @@ for x in a:
         sum += cnt
     else:
         cnt = 0
-
 print(sum)

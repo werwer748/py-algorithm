@@ -12,71 +12,42 @@
 N 명이 주사위 게임에 참여하였을 때, 가장 많은 상금을 받은 사람의 상금을 출력하는 프로그램 을 작성하시오
 '''
 
-# import sys
-# sys.stdin = open('in5.txt', 'rt')
+import sys
+sys.stdin = open('in5.txt', 'rt')
 
 '''
 # 내 풀이
 n = int(input())
-price = 0
+res = 0
 
 for i in range(n):
-    tmp = 0
-    diceList = list(map(int, input().split()))
-    setDice = set(diceList)
-    lenOfSetDice = len(setDice)
+    dice = list(map(int, input().split()))
+    dice_checker = [0] * 7
+    for x in dice:
+        dice_checker[x] += 1
 
-    if lenOfSetDice == 1:
-        tmp = 10000 + diceList[0] * 1000
-    if lenOfSetDice == 2:
-        twoDice = None
-        for i2 in setDice:
-            if diceList.count(i2) == 2:
-                twoDice = i2
-        else: 
-            tmp = 1000 + twoDice * 100
-    if lenOfSetDice == 3:
-        tmp = max(diceList) * 100
+    max_finder = max(dice_checker)
 
-    if price < tmp:
-        price = tmp
+    if max_finder == 3:
+        money = 10000 + (dice_checker.index(3) * 1000)
+    elif max_finder == 2:
+        money = 1000 + (dice_checker.index(2) * 100)
+    else:
+        lastIdx = (len(dice_checker) - 1) - (dice_checker[::-1].index(1))
+        money = lastIdx * 100
 
-print(price)
+    if res < money:
+        res = money
+
+print(res)
 '''
-
-'''
-# 내 풀이2
-n = int(input())
-price = 0
-
-for i in range(n):
-    tmp = 0
-    diceList = list(map(int, input().split()))
-    diceList.sort()
-    setDice = set(diceList)
-    lenOfSetDice = len(setDice)
-
-    if lenOfSetDice == 1:
-        tmp = 10000 + diceList[0] * 1000
-    if lenOfSetDice == 2:
-        tmp = 1000 + diceList[2] * 100
-    if lenOfSetDice == 3:
-        tmp = max(diceList) * 100
-
-    if price < tmp:
-        price = tmp
-
-print(price)
-'''
-import sys
-sys.stdin = open('in1.txt', 'rt')
 
 # 강사 풀이
 n = int(input())
 res = 0
 
 for i in range(n):
-    tmp = input().split() # 문자로 리스트
+    tmp = input().split()
     tmp.sort()
     a, b, c = map(int, tmp)
 
@@ -88,13 +59,8 @@ for i in range(n):
         money = 1000 + b * 100
     else:
         money = c * 100
-
     if money > res:
         res = money
-
 print(res)
-
-
-
 
 

@@ -11,7 +11,7 @@
 
 ''' 코드로 구현해보기 '''
 import sys
-sys.stdin = open("in5.txt", "rt")
+sys.stdin = open("in1.txt", "rt")
 
 n = int(input())
 

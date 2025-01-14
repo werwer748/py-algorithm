@@ -6,61 +6,68 @@ N개의 자연수가 입력되면 각 자연수를 뒤집은 후 그 뒤집은 �
 첫 자리부터의 연속된 0은 무시한다.
 뒤집는 함수인 def reverse(x) 와 소수인지를 확인하는 함수 def isPrime(x)를 반드시 작성하여 프로그래밍 한다.
 '''
-
+import math
 import sys
-sys.stdin = open('in1.txt', 'rt')
+sys.stdin = open('in2.txt', 'rt')
 
 '''
-# 내 풀이
-n = int(input())
-ary = list(input().split())
+# 내풀이
+def reverse(x):
+    x_s = str(x)
+    res = ''
 
-maxRange = 100001
-maxArray = [0] * maxRange
-primeList = [0] * maxRange
-for i in range(2, maxRange):
-    if maxArray[i] == 0:
-        primeList[i] = 1
-        for j in range(i, maxRange, i):
-            maxArray[j] = 1
+    for i in range(len(x_s) - 1, -1, -1):
+        res += x_s[i]
 
-def reverse(sn):
-    reverseString = ''
-    for s in sn:
-        reverseString = s + reverseString
-    else:
-        return int(reverseString)
+    return int(res)
+
+def reverse2(x):
+    res = 0
+    while x > 0:
+        tmp = x % 10
+        res = (res * 10) + tmp
+        x = x // 10
+    return res
 
 def isPrime(x):
-    if primeList[x] == 1:
-        return x
-    return None
+    if x < 2:
+        return False
+    for i in range(2, int(math.sqrt(x)) + 1):
+        if x % i == 0:
+            return False
+    else:
+        return True
 
-for v in ary:
-    reverseInt = reverse(v)
-    intPrimeCheck = isPrime(reverseInt)
-    if intPrimeCheck:
-        print(intPrimeCheck, end=' ')
+
+n = int(input())
+n_list = list(map(int, input().split()))
+
+for x in n_list:
+    reverse_num = reverse2(x)
+
+    if isPrime(reverse_num):
+        print(reverse_num, end=" ")
 print()
 '''
 
-# 강사풀이
 def reverse(x):
     res = 0
     while x > 0:
         t = x % 10
         res = res * 10 + t
-        x = x // 10
+        x = x//10
     return res
+
 
 def isPrime(x):
     if x == 1:
         return False
-    for i in range(2, x//2 + 1): # 약수는 x값의 절반까지만 존재 (2 * 절반 = x)
+    for i in range(2, x//2 + 1):
         if x % i == 0:
             return False
     else:
         return True
+
 
 n = int(input())
 a = list(map(int, input().split()))
