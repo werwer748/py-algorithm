@@ -18,37 +18,26 @@
 import sys
 sys.stdin = open("in1.txt", "rt")
 
-# 강사풀이
+'''
+# 내 풀이
+ary = list(range(0, 21))
+
+for i in range(10):
+    ai, bi = map(int, input().split())
+    rev = ary[ai:bi + 1]
+    rev.reverse()
+    ary[ai:bi + 1] = rev
+
+print(" ".join(map(str, ary[1:])))
+'''
+
 a = list(range(21))
 
-for _ in range(10): # _ 를 하면 변수가 없는 것.
+for _ in range(10):
     s, e = map(int, input().split())
     for i in range((e - s + 1) // 2):
         a[s + i], a[e - i] = a[e - i], a[s + i]
 
-a.pop(0) # index번호에 해당하는거 삭제
+a.pop(0)
 for x in a:
     print(x, end=' ')
-
-'''
-# 내 풀이
-a = list(range(1, 21))
-
-for i in range(10):
-    n1, n2 = map(int, input().split())
-    tmp = a[n1 - 1:n2]
-    tmp.reverse()
-    a[n1 - 1:n2] = tmp
-
-for x in a:
-    print(x, end=' ')
-'''
-
-'''
-##? 결과값 스왑하는 법
-a, b = map(int, input().split())
-print(a, b)
-a, b = b, a
-print(a, b)
-'''
-

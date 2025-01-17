@@ -9,13 +9,36 @@
 '''
 
 import sys
+import re
 sys.stdin = open("in1.txt", "rt")
-# print(ord('0'), ord('9')) # 48 ~ 57
 
-# 강사 풀이
+'''
+# 내 풀이
+get_numbers = re.sub('[^0-9]', '', input())
+
+res_num = 0
+
+for x in get_numbers:
+    res_num = res_num * 10 + int(x)
+
+res_cnt = 0
+
+for i in range(1, res_num // 2 + 1):
+    if res_num % i == 0:
+        res_cnt += 1
+
+print(res_num)
+print(res_cnt + 1)
+'''
+
+# 강사풀이
+
 s = input()
 res = 0
-for x in s: # isdigit: 모든 숫자로 보이는 형태를 찾아줌, isdecimal: 0~9까지 숫자인지 체크
+
+for x in s:
+    #? isdigit: 모든 형태의 숫자 모양을 판별
+    #? isdecimal: 0 ~ 9까지의 숫자중 하나인지 판별
     if x.isdecimal():
         res = res * 10 + int(x)
 print(res)
@@ -25,27 +48,4 @@ cnt = 0
 for i in range(1, res + 1):
     if res % i == 0:
         cnt += 1
-
 print(cnt)
-
-'''
-# 내 풀이
-text = input()
-numText = ''
-
-for c in text:
-    if ord(c) >= 48 and ord(c) <= 57:
-        numText += c
-
-num = int(numText)
-cnt = 0
-
-for i in range(1, num + 1):
-    if num % i == 0:
-        cnt += 1
-
-print(num)
-print(cnt)
-'''
-
-

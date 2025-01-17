@@ -4,15 +4,16 @@
 오름차순으로 정렬이 된 두 리스트가 주어지면 두 리스트를 오름차순으로 합쳐 출력하는 프로 그램을 작성하세요.
 '''
 import sys
-sys.stdin = open("in1.txt", "rt")
+sys.stdin = open("in5.txt", "rt")
 
-# 강사풀이
+# 강사 풀이
 n = int(input())
 a = list(map(int, input().split()))
 m = int(input())
 b = list(map(int, input().split()))
 
 p1 = p2 = 0
+
 c = []
 
 while p1 < n and p2 < m:
@@ -22,14 +23,13 @@ while p1 < n and p2 < m:
     else:
         c.append(b[p2])
         p2 += 1
-
 if p1 < n:
     c = c + a[p1:]
 if p2 < m:
-    c = c +b[p2:]
+    c = c + b[p2:]
 
 for x in c:
-    print(x, end=' ')
+    print(x, end=" ")
 
 '''
 # 내 풀이
@@ -38,34 +38,25 @@ a1 = list(map(int, input().split()))
 n2 = int(input())
 a2 = list(map(int, input().split()))
 
-point1 = 0
-point2 = 0
-result = []
+res = []
 
-print(a1[point1], a2[point2])
+p1 = 0
+p2 = 0
 
-for i in range(n1 + n2):
-    if point1 >= n1:
-        result = result + a2[point2:]
-        break
-    if point2 >=n2:
-        result = result + a1[point1:]
-        break
-    if a1[point1] <= a2[point2]:
-        result.append(a1[point1])
-        point1 += 1
+while len(res) < (n1 + n2):
+    if a1[p1] > a2[p2]:
+        res.append(a2[p2])
+        p2 += 1
     else:
-        result.append(a2[point2])
-        point2 += 1
+        res.append(a1[p1])
+        p1 += 1
 
-resultToString = ' '.join(map(str, result))
-sys.stdin = open("out1.txt", "rt")
-out = input()
+    if p1 == len(a1) and p2 < len(a2):
+        res = res + a2[p2::]
+    elif p1 < len(a1) and p2 == len(a2):
+        res = res + a1[p1::]
 
-if out == resultToString:
-    print('Success')
-else:
-    print('Failure')
+print(" ".join(map(str, res)))
 '''
 
 '''
