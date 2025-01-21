@@ -2,22 +2,21 @@
 곳감(모래시계)
 '''
 import sys
-sys.stdin = open("in1.txt", "rt")
+sys.stdin = open("in5.txt", "rt")
 
-# 강사 풀이
 n = int(input())
 a = [list(map(int, input().split())) for _ in range(n)]
 m = int(input())
 
+# 강사 풀이
 for i in range(m):
     h, t, k = map(int, input().split())
-
-    if t == 0: # 왼쪽
+    if t == 0:
         for _ in range(k):
-            a[h-1].append(a[h-1].pop(0))
+            a[h - 1].append(a[h - 1].pop(0))
     else:
         for _ in range(k):
-            a[h-1].insert(0, a[h-1].pop())
+            a[h - 1].insert(0, a[h - 1].pop())
 
 res = 0
 s = 0
@@ -36,38 +35,30 @@ print(res)
 
 '''
 # 내 풀이
-n = int(input())
-a = [list(map(int, input().split())) for _ in range(n)]
-
-m = int(input())
-
 for i in range(m):
-    position, lr, count = map(int, input().split())
-    position -= 1
-    for j in range(count):
+    target, lr, ran = map(int, input().split())
+    target_list = a[target - 1][:]
+    for j in range(ran):
         if lr == 0:
-            a[position].append(a[position][0])
-            a[position].pop(0)
+            target_list.append(target_list[0])
+            target_list.pop(0)
         else:
-            a[position].insert(0, a[position][n - 1])
-            a[position].pop()
+            target_list.insert(0, target_list[-1])
+            target_list.pop()
+    a[target - 1] = target_list
 
-
-
+start = 0
+end = n
 res = 0
-s = 0
-e = n
 
 for i in range(n):
-    ary = a[i]
-    for j in range(s, e):
-        res += ary[j]
-    if i < (n // 2):
-        s += 1
-        e -= 1
+    for j in range(start, end):
+        res += a[i][j]
+    if i < n // 2:
+        start += 1
+        end -= 1
     else:
-        s -= 1
-        e += 1
-
+        start -= 1
+        end += 1
 print(res)
 '''

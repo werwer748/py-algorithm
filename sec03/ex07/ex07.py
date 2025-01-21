@@ -7,43 +7,41 @@
 현수과 수확하는 사과의 총 개수를 출력하세요.
 '''
 import sys
-sys.stdin = open("in.txt", "rt")
+sys.stdin = open("in5.txt", "rt")
 
-#강사 풀이
 n = int(input())
 a = [list(map(int, input().split())) for _ in range(n)]
 
+# 강사 풀이
 res = 0
 s = e = n // 2
 
 for i in range(n):
     for j in range(s, e + 1):
         res += a[i][j]
-    if i < n // 2: # 절반까지 내려오기 전
+    if i < n // 2:
         s -= 1
         e += 1
-    else: # 절반까지 내려온 후
+    else:
         s += 1
         e -= 1
-
 print(res)
 
 '''
 # 내 풀이
-n = int(input())
-a = [list(map(int, input().split())) for _ in range(n)]
-
-half = n//2
-result = 0
+cnt = 0
+center = n // 2
+start = end = center
 
 for i in range(n):
-    pointer = [[0, half]]
-    if i <= half:
-        for j in range(half - i, half + (i + 1)):
-            result += a[i][j]
+    for j in range(start, end + 1):
+        cnt += a[i][j]
+    if i < center:
+        start -= 1
+        end += 1
     else:
-        for j in range(i - half, half + (n - i)):
-            result += a[i][j]
+        start += 1
+        end -= 1
 
-print(result)
+print(cnt)
 '''
