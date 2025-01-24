@@ -17,75 +17,65 @@ DVD에는 총 N개의 곡이 들어가는데, DVD에 녹화할 때에는 라이�
 첫 번째 줄부터 DVD의 최소 용량 크기를 출력하세요.
 """
 import sys
-sys.stdin = open("in5.txt", "rt")
+sys.stdin = open("in3.txt", "rt")
 
-# 재풀이
-n, m = map(int, input().split()) # n = 곡수, m = DVD 수
-songs = list(map(int, input().split()))
-maxSong = max(songs)
-
-sumSongs = sum(songs) # 1장에 모두 담을 수 있는 용량
-res = 0 # 최소 몇분짜리 DVD여야 하는가?
-
+'''
+# 강사 풀이
+n, m = map(int, input().split())
+Music = list(map(int, input().split()))
+maxx = max(Music)
 lt = 1
-rt = sumSongs
-
-def checker(mid):
-    cnt = 1
-    tmp = 0
-    for x in songs:
-        tmp += x
-        if tmp > mid:
-            cnt += 1
-            tmp = x
-    if cnt <= m:
-        return True
-    else:
-        return False
-
-
-while lt <= rt:
-    mid = (lt + rt) // 2
-    if checker(mid) and mid >= maxSong:
-        res = mid
-        rt = mid - 1
-    else:
-        lt = mid + 1
-
-print(res)
-
-
-
-"""
-#! 못풀어서 강의보고 클론코딩... 문제 이해가 어려움
-n, m = map(int, input().split()) # n = 부른 곡수, m = 소속사에서 찍어내려는 DVD 개수
-music = list(map(int, input().split()))
-max_m = max(music)
-
-lt = 1
-rt = sum(music)
+rt = sum(Music)
 res = 0
 
-def checker(capacity):
+def Count(capacity):
     cnt = 1
-    dvd_sum = 0
-    for x in music:
-        if dvd_sum + x > capacity:
+    sum = 0
+    for x in Music:
+        if sum + x > capacity:
             cnt += 1
-            dvd_sum = x
+            sum = x
         else:
-            dvd_sum += x
+            sum += x
     return cnt
 
 
 while lt <= rt:
     mid = (lt + rt) // 2
-    if mid >= max_m and checker(mid) <= m:
+    if mid >= maxx and Count(mid) <= m:
         res = mid
-        rt = mid - 1 # 더 작은 범위 탐색
+        rt = mid - 1
     else:
         lt = mid + 1
 print(res)
-"""
+'''
+
+
+# 내 풀이
+n, m = map(int, input().split())
+songs = list(map(int, input().split()))
+
+lt = max(songs)
+rt = sum(songs)
+res = None
+
+while lt <= rt:
+    mid = (lt + rt) // 2
+    dvd = 1
+    rec = 0
+
+    for x in songs:
+        rec += x
+        if rec > mid:
+            dvd += 1
+            rec = x
+
+    if dvd > m:
+        lt = mid + 1
+    else:
+        rt = mid - 1
+        res = mid
+
+print(res)
 
 

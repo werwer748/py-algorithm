@@ -2,11 +2,9 @@
 스도쿠 검사
 '''
 import sys
+sys.stdin = open("in1.txt", "rt")
 
-sys.stdin = open("in5.txt", "rt")
-
-
-## 강사 코드 설명
+# 강사 풀이
 def check(a):
     for i in range(9):
         ch1 = [0] * 10
@@ -29,32 +27,40 @@ def check(a):
 
 
 a = [list(map(int, input().split())) for _ in range(9)]
+
 if check(a):
     print("YES")
 else:
     print("NO")
 
+
 '''
+# 내 풀이
 a = [list(map(int, input().split())) for _ in range(9)]
-res = 'YES'
+
+res = "YES"
+
+# [-1, -1][-1, 0][-1, 1]
+# [0, -1][0, 0][0, 1]
+# [1, -1][1, 0][1, 1]
+
+dx = [-1, -1, -1, 0, 0, 0, 1, 1, 1]
+dy = [-1, 0, 1, -1, 0, 1, -1, 0, 1]
 
 for i in range(9):
-    rc = [0] * 10
-    cc = [0] * 10
+    rc = set(a[i])
+    cc = set()
     for j in range(9):
-        rc[a[i][j]] = 1
-        cc[a[j][i]] = 1
-    if sum(rc) != 9 or sum(cc) != 9:
-        res = 'NO'
+        cc.add(a[j][i])
+        bc = set()
+        if i % 3 == 1 and j % 3 == 1:
+            for k in range(len(dx)):
+                bc.add(a[j + dx[k]][i + dy[k]])
+            else:
+                if len(bc) != 9:
+                    res = "NO"
 
-for i in range(3):
-    for j in range(3):
-        sc = [0] * 10
-        for k in range(3):
-            for s in range(3):
-                sc[a[i * 3 + k][j * 3 + s]] = 1
-        if sum(sc) != 9:
-            res = 'NO'
-
+    if len(rc) != 9 and len(cc) != 9:
+        res = "NO"
 print(res)
 '''

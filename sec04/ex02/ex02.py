@@ -20,41 +20,12 @@ K는 1이상 10,000이하의 정수이고, N은 1이상 1,000,000이하의 정�
 import sys
 sys.stdin = open("in5.txt", "rt")
 
-# 재풀이
-k, n = map(int, input().split())
-Line = []
-res = 0
-for _ in range(k):
-    Line.append(int(input()))
-
-
-lt = 0
-rt = max(Line)
-def lineChecker(m):
-    cnt = 0
-    for x in Line:
-        cnt += x // m
-    return cnt
-
-
-while lt <= rt:
-    mid = (lt + rt) // 2
-    check = lineChecker(mid)
-    if check >= n:
-        if res < mid:
-            res = mid
-        lt = mid + 1
-    else:
-        rt = mid - 1
-
-print(res)
-
-"""
 # 강사 풀이
 k, n = map(int, input().split())
 Line = []
 res = 0
 largest = 0
+
 for i in range(k):
     tmp = int(input())
     Line.append(tmp)
@@ -70,7 +41,6 @@ def Count(len):
 lt = 1
 rt = largest
 
-
 while lt <= rt:
     mid = (lt + rt) // 2
     if Count(mid) >= n:
@@ -78,37 +48,30 @@ while lt <= rt:
         lt = mid + 1
     else:
         rt = mid - 1
-print(res)
-"""
 
-"""
+print(res)
+
+'''
 # 내 풀이
 k, n = map(int, input().split())
-a = list(map(int, list(input() for _ in range(k))))
-findMax = max(a)
-findMin = 1
-result = 0
-def lineChecker(m):
-    temp = 0
-    for x in a:
-        temp += x // m
-    if temp >= n:
-        return True
+lines = [int(input()) for _ in range(k)]
+
+cm = lt = 0
+rt = max(lines)
+
+while lt <= rt:
+    mid = (lt + rt) // 2
+    cnt = 0
+
+    for x in lines:
+        cnt += x // mid
+
+    if cnt >= n:
+        lt = mid + 1
+        if cm < mid:
+            cm = mid
     else:
-        return False
+        rt = mid - 1
 
-
-while findMin < findMax:
-    mid = (findMin + findMax) // 2
-    check = lineChecker(mid)
-
-    if check:
-        findMin = mid + 1
-        if result < mid: # 어차피 최소범위가 느니까... 굳이 if문 처리가 필요가 없음...
-            result = mid
-    else:
-        findMax = mid - 1
-
-print(result)
-"""
-
+print(cm)
+'''
