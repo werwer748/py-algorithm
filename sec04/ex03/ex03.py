@@ -77,5 +77,3 @@ while lt <= rt:
         res = mid
 
 print(res)
-
-

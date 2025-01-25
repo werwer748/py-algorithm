@@ -16,57 +16,27 @@ C마리의 말을 N개의 마구간에 배치했을 때 가장 가까운 두 말
 import sys
 sys.stdin = open("in5.txt", "rt")
 
-# 재풀이
+'''
+# 강사 풀이
 n, c = map(int, input().split())
-cabinets = []
-
-for _ in range(n):
-    cabinets.append(int(input()))
-cabinets.sort()
-
-def checker(mid):
-    cnt = 1
-    endPoint = cabinets[0]
-    for i in range(1, n):
-        if (cabinets[i] - endPoint) >= mid:
-            cnt += 1
-            endPoint = cabinets[i]
-    return cnt
-
-
-lt = 1
-rt = max(cabinets)
-res = 0
-
-while lt <= rt:
-    mid = (lt + rt) // 2 # 5
-    if checker(mid) >= c:
-        lt = mid + 1
-        if res <= mid:
-            res = mid
-    else:
-        rt = mid - 1
-
-print(res)
-
-
-"""
-n, c = map(int, input().split()) # n = 마구간 갯수, c = 말 마리수
 Line = []
-for _ in range(n):
-    Line.append(int(input()))
-Line.sort()
 
 def Count(len):
     cnt = 1
-    endpoint = Line[0]
+    ep = Line[0]
+
     for i in range(1, n):
-        if Line[i] - endpoint >= len:
+        if Line[i] - ep >= len:
             cnt += 1
-            endpoint = Line[i]
+            ep = Line[i]
     return cnt
 
-lt = 1 # 최소거리?
+for _ in range(n):
+    tmp = int(input())
+    Line.append(tmp)
+Line.sort()
+
+lt = 1
 rt = Line[n - 1]
 while lt <= rt:
     mid = (lt + rt) // 2
@@ -75,15 +45,49 @@ while lt <= rt:
         lt = mid + 1
     else:
         rt = mid - 1
+print(res)
+'''
+# 내 풀이
+def i_sort(a):
+    for i in range(1, len(a)):
+        key = a[i]
+        j = i - 1
+        while j >= 0 and a[j] > key:
+            a[j + 1] = a[j]
+            j -= 1
+        a[j + 1] = key
+    return a
+
+
+n, c = map(int, input().split())
+a = [int(input()) for _ in range(n)]
+
+
+lt = a[0]
+rt = a[n - 1]
+cen = i_sort(a)
+res = 0
+
+def center_checker(m, hor):
+    np = 0
+
+    for i in range(1, len(cen)):
+        if cen[i] - cen[np] >= m:
+            hor -= 1
+            np = i
+
+    return hor
+
+
+while lt <= rt:
+    mid = (lt + rt) // 2
+
+    horses = center_checker(mid, c - 1)
+
+    if horses <= 0:
+        res = mid
+        lt = mid + 1
+    else:
+        rt = mid - 1
 
 print(res)
-"""
-
-
-
-
-
-
-
-
-

@@ -16,7 +16,7 @@
 첫째 줄에 최대 사용할 수 있는 회의 수를 출력하여라.
 """
 import sys
-sys.stdin = open("in5.txt", "rt")
+sys.stdin = open("in1.txt", "rt")
 
 n = int(input()) # 회의의 갯수
 meeting = [] # 빈리스트
@@ -24,14 +24,40 @@ meeting = [] # 빈리스트
 for i in range(n):
     s, e = map(int, input().split())
     meeting.append((s, e))
+
 # meeting.sort() # 그냥 정렬시 튜플의 0번째 기준으로 정렬
-meeting.sort(key=lambda x: (x[1], x[0])) # 미팅시간을 종료시간 기준으로 정렬
-# print(meeting)
+#? 내장 함수 정렬!
+# meeting.sort(key=lambda x: (x[1], x[0])) # 미팅시간을 종료시간 기준으로 정렬 - 1순위가 미팅 종료시간 2순위가 미팅 시작 시간
+#? 퀵 정렬 활용해보기
+def quick_sort(m):
+    if len(m) < 1:
+        return m
+
+    _, pivot = m[len(m) // 2]
+    left = [x for x in m if x[1] < pivot]
+    middle = [x for x in m if x[1] == pivot]
+    right = [x for x in m if x[1] > pivot]
+    return quick_sort(left) + middle + quick_sort(right)
+
+# def quick_sort(m):
+#     if len(m) < 1:
+#         return m
+#
+#     pivot = m[len(m) // 2]
+#     left = [x for x in m if x < pivot]
+#     middle = [x for x in m if x == pivot]
+#     right = [x for x in m if x > pivot]
+#     return quick_sort(left) + middle + quick_sort(right)
+#
+# end_time_list = [x for _, x in meeting]
+sorted_meeting = quick_sort(meeting)
+# print(sorted_meeting)
 
 endTime = 0
 cnt = 0
 
-for s, e in meeting:
+# for s, e in meeting:
+for s, e in sorted_meeting:
     if s >= endTime:
         endTime = e
         cnt += 1
