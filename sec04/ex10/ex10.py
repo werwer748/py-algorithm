@@ -1,5 +1,5 @@
 """
-1부터 n까지의 수를 한 번씩만 사용하여 이루어진 수열이 있을 때, 1부터 n까지 각각의 수 앞 에 놓여 있는 자신보다 큰 수들의 개수를 수열로 표현한 것을 역수열이라 한다.
+1부터 n까지의 수를 한 번씩만 사용하여 이루어진 수열이 있을 때, 1부터 n까지 각각의 수 앞에 놓여 있는 자신보다 큰 수들의 개수를 수열로 표현한 것을 역수열이라 한다.
 예를 들어 다음과 같은 수열의 경우
 4 8 6 2 5 1 3 7
 
@@ -17,12 +17,11 @@ n과 1부터 n까지의 수를 사용하여 이루어진 수열의 역수열이 
 원래 수열을 출력한다.
 """
 import sys
-sys.stdin = open("in1.txt")
+sys.stdin = open("in3.txt")
 
-
-# 강사풀이 - ㄷㄷ 쩐당...
+# 강사 풀이
 n = int(input())
-a = list(map(int, input().split())) # 역수열
+a = list(map(int, input().split()))
 seq = [0] * n
 
 for i in range(n):
@@ -33,40 +32,50 @@ for i in range(n):
         elif seq[j] == 0:
             a[i] -= 1
 
-for x in seq:
-    print(x, end=' ')
+res = "".join(list(map(str, seq)))
 
-"""
+sys.stdin = open("out3.txt")
+correct = "".join((input().split()))
+if res == correct:
+    print("OK")
+else:
+    print("FAIL")
+    print(res)
+    print(correct)
+
+
+
+'''
 # 내 풀이
 n = int(input())
 a = list(map(int, input().split()))
-nList = []
-for i in range(1, n + 1):
-    nList.append(i) # 1 ~ 8
+seq = [0] * n
 
-lt = 0
-rt = n - 1
-res = [0] * n
-
-while sum(res) < sum(nList):
-# while lt <= rt:
-    zeroCnt = 0
-    for i in range(n):
-        if zeroCnt == a[lt]:
-            if res[i] == 0:
-                res[i] = nList[lt]
-            else:
-                for j in range(i, n):
-                    if res[j] == 0:
-                        res[j] = nList[lt]
-                        break
+for i in range(n):
+    tmp = a[i] + 1
+    p = 0
+    for j in range(n):
+        if seq[j] == 0:
+            tmp -= 1
+        if tmp == 0:
+            p = j
             break
-        if res[i] == 0:
-            zeroCnt += 1
-    lt += 1
 
-str = ' '.join(map(str, res))
-print(str)
+    if seq[p] != 0:
+        for k in range(p + 1, n + 1):
+            if seq[k] != 0:
+                p = k
+
+    seq[p] = i + 1
+
+res = "".join(list(map(str, seq)))
+
 sys.stdin = open("out5.txt")
-print(input())
-"""
+correct = "".join((input().split()))
+if res == correct:
+    print("OK")
+else:
+    print("FAIL")
+    print(res)
+    print(correct)
+'''

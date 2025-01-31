@@ -14,15 +14,15 @@ N명의 승객 몸무게가 주어졌을 때 승객 모두가 탈출하기 위�
 첫째 줄에 구명보트의 최소 개수를 출력합니다.
 """
 import sys
+sys.stdin = open("in.txt")
+
+# deque 활용하기
 from collections import deque
-sys.stdin = open("in3.txt")
 
-
-# 강사 풀이2 => 성능 개선!
 n, limit = map(int, input().split())
 p = list(map(int, input().split()))
 p.sort()
-p = deque(p) #* deque라는 자료구조로 만든다.
+p = deque(p)
 cnt = 0
 
 while p:
@@ -33,21 +33,20 @@ while p:
         p.pop()
         cnt += 1
     else:
-        p.popleft() #? 첫 번쨰 요소 제거
+        p.popleft()
         p.pop()
         cnt += 1
-
 print(cnt)
 
-"""
+
+
+'''
 # 강사 풀이
 n, limit = map(int, input().split())
 p = list(map(int, input().split()))
 p.sort()
 cnt = 0
 
-#? while list: => 리스트가 비면 멈춘다!
-#? pop은 성능상 좋지 못함.
 while p:
     if len(p) == 1:
         cnt += 1
@@ -59,28 +58,40 @@ while p:
         p.pop(0)
         p.pop()
         cnt += 1
-
 print(cnt)
-"""
+'''
 
-"""
+
+'''
 # 내 풀이
-n, m = map(int, input().split()) #* n: 승객 수, m: 보트 무게 제한
-a = list(map(int, input().split())) #* 승객들 몸무게
-a.sort()
+n, m = map(int, input().split())
+weights = list(map(int, input().split()))
 
+def quick_sort(a):
+    if len(a) <= 1:
+        return a
+
+    pivot = a[len(a) // 2]
+    l = [x for x in a if x > pivot]
+    m = [x for x in a if x == pivot]
+    r = [x for x in a if x < pivot]
+
+    return quick_sort(l) + m + quick_sort(r)
+weights = quick_sort(weights)
 boat = 0
-lt = 0
-rt = n - 1
-while lt <= rt:
-    boat += 1
-    temp = a[lt] + a[rt]
-    if temp <= m:
-        lt += 1
-        rt -= 1
+
+while weights:
+    dv_idx = -1
+    for i in range(len(weights) - 1, -1, -1):
+        w = weights[0] + weights[i]
+        if w <= m:
+            dv_idx = i
+    if dv_idx <= -1:
+        weights.pop(0)
     else:
-        rt -= 1
-
-
+        weights.pop(dv_idx)
+        if len(weights):
+            weights.pop(0)
+    boat += 1
 print(boat)
-"""
+'''

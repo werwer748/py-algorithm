@@ -5,7 +5,7 @@
 이 수열의 왼쪽 맨 끝 숫자 또는 오른쪽 맨 끝 숫자 중 하나를 가져와 나열하여 가장 긴 증가수열 을 만듭니다.
 이때 수열에서 가져온 숫자(왼쪽 맨 끝 또는 오른쪽 맨 끝)는 그 수열에서 제거됩니다.
 예를 들어 2 4 5 1 3 이 주어지면 만들 수 있는 가장 긴 증가수열의 길이는 4입니다.
-맨 처음 왼쪽 끝에서 2를 가져오고, 그 다음 오른쪽 끝에서 3을 가져오고, 왼쪽 끝에서 4, 왼쪽끝에서5를가져와 2345증가수열을만들수있습니다.
+맨 처음 왼쪽 끝에서 2를 가져오고, 그 다음 오른쪽 끝에서 3을 가져오고, 왼쪽 끝에서 4, 왼쪽 끝에서 5를 가져와 2345 증가수열을 만들 수 있습니다.
 
 #! 입력 설명
 첫째 줄에 자연수 N(3<=N<=100)이 주어집니다. 두 번째 줄에 N개로 구성된 수열이 주어집니다.
@@ -20,7 +20,52 @@
 import sys
 sys.stdin = open("in3.txt")
 
-# # 강사풀이
+# 내 풀이
+n = int(input())
+a = list(map(int, input().split()))
+
+lt = 0
+rt = n - 1
+last = -float("inf")
+res = ""
+
+# while lt <= rt:
+#     left = a[lt] if last < a[lt] else float("inf")
+#     right = a[rt] if last < a[rt] else float("inf")
+#
+#     if left == right:
+#         break
+#
+#     if left < right:
+#         last = a[lt]
+#         res += "L"
+#         lt += 1
+#     if right < left:
+#         last = a[rt]
+#         res += "R"
+#         rt -= 1
+while lt <= rt:
+    left = a[lt] if last < a[lt] else float("inf")
+    right = a[rt] if last < a[rt] else float("inf")
+
+    if left <= right:
+        if left == float("inf"):
+            break
+        last = a[lt]
+        res += "L"
+        lt += 1
+    else:
+        if right == float("inf"):
+            break
+        last = a[rt]
+        res += "R"
+        rt -= 1
+
+print(len(res))
+print(res)
+
+'''
+# 강사 풀이
 n = int(input())
 a = list(map(int, input().split()))
 
@@ -31,12 +76,13 @@ res = ""
 tmp = []
 
 while lt <= rt:
+    print(last)
     if a[lt] > last:
         tmp.append((a[lt], 'L'))
     if a[rt] > last:
         tmp.append((a[rt], 'R'))
     tmp.sort()
-
+    print(lt, rt, tmp)
     if len(tmp) == 0:
         break
     else:
@@ -46,37 +92,7 @@ while lt <= rt:
             lt += 1
         else:
             rt -= 1
-    tmp.clear() # 비우기
-
+    tmp.clear()
 print(len(res))
 print(res)
-
-"""
-# 내 풀이
-n = int(input())
-a = list(map(int, input().split()))
-
-lt = 0
-rt = n - 1
-last = 0
-point = ''
-
-while last <= a[lt] or last <= a[rt]:
-    temp = []
-    print(last, a[lt], a[rt])
-    if last <= a[lt]:
-        temp.append((a[lt], 'L'))
-    if last <= a[rt]:
-        temp.append((a[rt], 'R'))
-    temp.sort()
-    last = temp[0][0]
-    point += temp[0][1]
-
-    if temp[0][1] == 'L':
-        lt += 1
-    else:
-        rt -= 1
-
-print(len(point))
-print(point)
-"""
+'''

@@ -18,7 +18,7 @@
 M회의 높이 조정을 마친 후 가장 높은곳과 가장 낮은 곳의 차이를 출력하세요.
 """
 import sys
-sys.stdin = open("in.txt")
+sys.stdin = open("in1.txt")
 
 # 강사 풀이
 L = int(input())
@@ -29,23 +29,28 @@ a.sort()
 
 for _ in range(m):
     a[0] += 1
-    a[L-1] -= 1
+    a[L - 1] -= 1
     a.sort()
-
 print(a[L - 1] - a[0])
 
-"""
+'''
 # 내 풀이
-l = int(input()) # 창고 가로길이
-box_list = list(map(int, input().split()))
-m = int(input())
+width = int(input())
+boxes = list(map(int, input().split()))
+boxes.sort()
+moving = int(input())
 
-for i in range(m):
-    box_list.sort()
-    # print(box_list[0], box_list[l -1])
-    box_list[0] += 1
-    box_list[l - 1] -= 1
-else:
-    res = max(box_list) - min(box_list)
-    print(res)
-"""
+def bubble_sort(a):
+    for i in range(len(a)):
+        for j in range(1, len(a) - i):
+            if a[j - 1] >= a[j]:
+                a[j - 1], a[j] = a[j], a[j - 1]
+    return a
+
+
+for _ in range(moving):
+    boxes[width-1] -= 1
+    boxes[0] += 1
+    boxes = bubble_sort(boxes)
+print(boxes[width-1] - boxes[0])
+'''
