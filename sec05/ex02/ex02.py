@@ -19,34 +19,11 @@
 import sys
 sys.stdin = open("in5.txt", "r")
 
+# 강사 풀이
 s = input()
 stack = []
 cnt = 0
 
-# 재풀이 2
-for i in range(len(s)):
-    if s[i] == "(":
-        stack.append(s[i])
-    else:
-        stack.pop()
-        if s[i - 1] == "(":
-            cnt += len(stack)
-        else:
-            cnt += 1
-
-print(cnt)
-
-
-
-
-
-
-"""
-s = input()
-stack = []
-cnt = 0
-
-# 재풀이
 for i in range(len(s)):
     if s[i] == "(":
         stack.append(s[i])
@@ -57,24 +34,22 @@ for i in range(len(s)):
         else:
             cnt += 1
 print(cnt)
-"""
 
 
-
-"""
+'''
+# 내 풀이
 s = input()
 stack = []
 cnt = 0
 
-for i in range(len(s)):
-    if s[i] == '(': # 막대기 추가
-        stack.append(s[i])
+for i, x in enumerate(s):
+    if x == "(":
+        stack.append(x)
     else:
         stack.pop()
-        if s[i - 1] == '(': # 레이저
+        if s[i - 1] == "(":
             cnt += len(stack)
         else:
             cnt += 1
-
 print(cnt)
-"""
+'''

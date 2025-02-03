@@ -16,33 +16,10 @@
 가장 큰 수를 출력합니다.
 """
 import sys
-sys.stdin = open("in5.txt")
+sys.stdin = open("in4.txt")
 
-# 재풀이!!
 num, m = map(int, input().split())
 num = list(map(int, str(num)))
-# print(num)
-
-stack = []
-
-for x in num:
-    for j in range(len(stack)):
-        if len(stack) and m > 0 and stack[-1] < x:
-            stack.pop()
-            m -= 1
-    stack.append(x)
-
-if m != 0:
-    stack = stack[:-m]
-
-res = ''.join(map(str, stack))
-print(res)
-
-
-"""
-num, m = map(int, input().split())
-num = list(map(int, str(num)))
-# print(num)
 
 stack = []
 
@@ -51,13 +28,47 @@ for x in num:
         stack.pop()
         m -= 1
     stack.append(x)
-
 if m != 0:
-    stack = stack[:-m]
-
+    stack = stack[:m]
 res = ''.join(map(str, stack))
 print(res)
-"""
+
+
+'''
+# 내 풀이
+num, m = map(int, input().split())
+num = list(map(int, str(num)))
+
+stack = []
+cnt = 0
+for i in range(len(num)):
+    if len(stack) == (len(num) - m):
+        break
+    copy_stack = stack[:]
+    for y in copy_stack:
+        if num[i] > y:
+            stack.pop()
+            cnt += 1
+        if cnt == m:
+            break
+    if cnt == m:
+        stack += num[i:]
+        break
+    stack.append(num[i])
+
+res = "".join(map(str, stack))
+# print(res)
+
+sys.stdin = open("out4.txt")
+correct = input()
+
+if res == correct:
+    print("SUCCESS")
+else:
+    print("FAIL")
+    print("res:: ", res)
+    print("correct:: ", correct)
+'''
 
 
 
