@@ -21,18 +21,20 @@ M번째 환자가 몇 번째로 진료받는지 출력하세요.
 """
 import sys
 from collections import deque
-sys.stdin = open("in2.txt", "r")
+sys.stdin = open("in4.txt", "r")
 
-#* 강사풀이
+# 강사 풀이
 n, m = map(int, input().split())
-Q = [(pos, val) for pos, val in enumerate(list(map(int, input().split())))] # 튜플로 만듬
+#* 리스트 컴프리헨션
+# Q = [(pos == m, val) for pos, val in enumerate(list(map(int, input().split())))]
+Q = [(pos, val) for pos, val in enumerate(list(map(int, input().split())))]
 Q = deque(Q)
 cnt = 0
 
 while True:
     cur = Q.popleft()
-    # 현재 튜플에 0은 pos, 1은 val
-    if any(cur[1] < x[1] for x in Q): # any 하나라도 참이면 참
+
+    if any(cur[1] < x[1] for x in Q):
         Q.append(cur)
     else:
         cnt += 1
@@ -41,23 +43,26 @@ while True:
 print(cnt)
 
 
-"""
-* 내풀이
-
+'''
+# 내 풀이
 n, m = map(int, input().split())
-patient = list(map(int, input().split()))
-indexed_patient = deque([{'idx': idx, 'value': val} for idx, val in enumerate(patient)])
-treatment = []
+danger = list(map(int, input().split()))
+danger = deque(list(map(lambda item: (int(item[1]), item[0] == m), enumerate(danger))))
+cnt = 0
 
-while indexed_patient:
-    cur = indexed_patient.popleft()
-    if indexed_patient and cur['value'] < max(indexed_patient, key=lambda x: x['value'])['value']:
-        indexed_patient.append(cur)
+while True:
+    p = danger.popleft()
+    ok = False
+    for x, y in danger:
+        if p[0] < x:
+            danger.append(p)
+            break
     else:
-        treatment.append(cur)
+        ok = True
 
-for idx, obj in enumerate(treatment):
-    if obj['idx'] == m:
-        print(idx + 1)
-        break
-"""
+    if ok:
+        cnt += 1
+        if p[1]:
+            print(cnt)
+            break
+'''
