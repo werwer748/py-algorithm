@@ -15,64 +15,89 @@
 후위표기식을 출력한다.
 """
 import sys
-sys.stdin = open("in5.txt")
+solution_num = "5"
+input_txt = 'in' + solution_num + ".txt"
+output_txt = 'out' + solution_num + ".txt"
+sys.stdin = open(input_txt)
 
-formula = input()
+# 강사 풀이
+a = input()
+stack = []
+res = ''
+for x in a:
+    if x.isdecimal():
+        res += x
+    else:
+        if x == "(":
+            stack.append(x)
+        elif x == "*" or x == "/":
+            while stack and (stack[-1] == "*" or stack[-1] == "/"):
+                res += stack.pop()
+            stack.append(x)
+        elif x == "+" or x == "-":
+            while stack and stack[-1] != "(":
+                res += stack.pop()
+            stack.append(x)
+        elif x == ")":
+            while stack and stack[-1] != "(":
+                res += stack.pop()
+            stack.pop()
+
+while stack:
+    res += stack.pop()
+
+
+sys.stdin = open(output_txt)
+correct = input().replace(" ", "")
+
+if res == correct:
+    print("SUCCESS")
+else:
+    print("FAIL")
+    print("res:: ", res)
+    print("correct:: ", correct)
+
+
+
+
+
+
+'''
+# 내 풀이
+s = input()
 stack = []
 res = ''
 
-for x in formula:
+for x in s:
     if x.isdecimal():
         res += x
+    elif x == "(":
+        stack.append(x)
+    elif x == "*" or x == "/":
+        while stack and (stack[-1] == "*" or stack[-1] == "/"):
+            res += stack.pop()
+        stack.append(x)
+    elif x == "+" or x == "-":
+        while stack and stack[-1] != "(":
+            res += stack.pop()
+        stack.append(x)
     else:
-        if x == '(':
-            stack.append(x)
-        elif x == '*' or x == '/':
-            while stack and (stack[-1] == '*' or stack[-1] == '/'):
-                res += stack.pop()
-            stack.append(x)
-        elif x == '+' or x == '-':
-            while stack and stack[-1] != '(':
-                res += stack.pop()
-            stack.append(x)
-        elif x == ')':
-            while stack and stack[-1] != '(':
-                res += stack.pop()
-            stack.pop()
+        while stack:
+            last = stack.pop()
+            if last != "(":
+                res += last
+            else:
+                break
 
-while stack:
-    res += stack.pop()
+res += "".join(stack)
 
-print(res)
+sys.stdin = open(output_txt)
+correct = input().replace(" ", "")
 
-
-
-
-
-
-
-
-
-"""
-for x in formula:
-    if x.isdecimal():
-        res += x
-    else:
-        if x == '(':
-            stack.append(x)
-        elif x == '*' or x == '/':
-            while stack and (stack[-1] == '*' or stack[-1] == '/'):
-                res += stack.pop()
-            stack.append(x)
-        elif x == '+' or x == '-':
-            while stack and stack[-1] != '(':
-                res += stack.pop()
-            stack.append(x)
-        elif x == ')':
-            while stack and stack[-1] != '(':
-                res += stack.pop()
-            stack.pop()
-
-while stack:
-    res += stack.pop()
-"""
+if res == correct:
+    print("SUCCESS")
+else:
+    print("FAIL")
+    print("res:: ", res)
+    print("correct:: ", correct)
+'''

@@ -12,27 +12,56 @@
 연산한 결과를 출력합니다.
 """
 import sys
-from array import ArrayType
+sys.stdin = open("in5.txt")
 
-sys.stdin = open("in3.txt")
-
-formula = input()
+# 강사 풀이
+a = input()
 stack = []
-res = 0
 
-for x in formula:
+for x in a:
     if x.isdecimal():
         stack.append(int(x))
     else:
-        n1 = stack.pop()
-        n2 = stack.pop()
         if x == '+':
+            n1 = stack.pop()
+            n2 = stack.pop()
             stack.append(n2 + n1)
         elif x == '-':
+            n1 = stack.pop()
+            n2 = stack.pop()
             stack.append(n2 - n1)
         elif x == '*':
+            n1 = stack.pop()
+            n2 = stack.pop()
             stack.append(n2 * n1)
         elif x == '/':
+            n1 = stack.pop()
+            n2 = stack.pop()
             stack.append(n2 / n1)
-
 print(stack[0])
+
+
+'''
+# 내 풀이
+s = input()
+stack = []
+res = 0
+
+for x in s:
+    if x.isdecimal():
+        stack.append(int(x))
+    else:
+        b = stack.pop()
+        f = stack.pop()
+        if x == "+":
+            res = f + b
+        elif x == "-":
+            res = f - b
+        elif x == "/":
+            res = f / b
+        elif x == "*":
+            res = f * b
+        stack.append(res)
+
+print(res)
+'''
