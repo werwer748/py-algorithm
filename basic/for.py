@@ -44,14 +44,15 @@ while True: # while true 무한반복
     i += 1
 '''
 
-'''
+
 # continue
 for i in range(1, 11):
     if i % 2 == 0:
         continue # continue 아래로 스킵하고 다음 반복
     print(i)
-'''
 
+
+'''
 # for else
 for i in range(1, 11):
     print(i)
@@ -59,4 +60,5 @@ for i in range(1, 11):
         break
 else: # for문이 정상적으로 모든 범위를 돌았을 때 작동됨. break로 range 범위를 못채우면 작동하지 않는다.
     print(11)
+'''
 
