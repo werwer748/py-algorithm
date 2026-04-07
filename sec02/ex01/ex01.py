@@ -1,5 +1,6 @@
 '''
 K번째 약수 구하기
+약수 없으면 -1
 '''
 import sys
 sys.stdin = open("in5.txt", "rt")
@@ -14,9 +15,7 @@ for i in range(1, n + 1):
     if n % i == 0:
         cnt += 1
     if cnt == k:
-        result = i
+        print(i)
         break
 else:
-    result = -1
-
-print(result)
+    print(-1)
