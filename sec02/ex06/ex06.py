@@ -1,14 +1,36 @@
-'''
+"""
 N개의 자연수가 입력되면 각 자연수의 자릿수의 합을 구하고, 그 합이 최대인 자연수를 출력
 하는 프로그램을 작성하세요. 각 자연수의 자릿수의 합을 구하는 함수를 def digit_sum(x)를
 꼭 작성해서 프로그래밍 하세요.
-'''
+"""
 
 import sys
 sys.stdin = open("in5.txt", "rt")
 
+n = int(input())
+nums = list(map(int, input().split()))
+big_sum = 0
+res = nums[0]
+
+def digit_sum(x):
+    tmp = 0
+    while x > 0:
+        tmp += x % 10
+        x = x // 10
+    return tmp
+
+
+for x in nums:
+    tmp = digit_sum(x)
+    if tmp > big_sum:
+        big_sum = tmp
+        res = x
+
+print(res)
+
+
 '''
-# 내 풀이
+# 내 풀이1
 n = int(input())
 ary = input().split()
 
@@ -30,6 +52,7 @@ for x in ary:
 print(max_str)
 '''
 
+'''
 # 강사풀이
 n = int(input())
 a = list(map(int, input().split()))
@@ -58,3 +81,4 @@ for x in a:
         res = x
 
 print(res)
+'''
