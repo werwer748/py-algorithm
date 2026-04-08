@@ -7,7 +7,33 @@ import sys
 sys.stdin = open("in5.txt", "rt")
 
 
-# 내풀이
+# 내풀이2
+n, m = map(int, input().split())
+sum_list = list(0 for i in range(n + m + 1))
+max_count = 0
+res = list()
+
+for i in range(1, n + 1):
+    for j in range(1, m + 1):
+        sum_list[i + j] += 1
+
+sum_list = [{i: pb} for i, pb in enumerate(sum_list)]
+
+for d in sum_list:
+    for k, v in d.items():
+        if max_count < v:
+            max_count = v
+            res = [k]
+        elif max_count == v:
+            res.append(k)
+
+for x in res:
+    print(x, end=" ")
+
+
+# 내풀이1
+
+'''
 n, m = map(int, input().split())
 sum_list = list(0 for i in range(n + m + 1))
 
@@ -20,6 +46,7 @@ max_num = max(sum_list)
 for i, x in enumerate(sum_list):
     if x == max_num:
         print(i, end=" ")
+'''
 
 '''
 # 강사풀이
