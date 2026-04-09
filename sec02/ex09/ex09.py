@@ -13,7 +13,62 @@ N 명이 주사위 게임에 참여하였을 때, 가장 많은 상금을 받은
 '''
 
 import sys
+from collections import Counter
+
 sys.stdin = open('in5.txt', 'rt')
+
+# 내 풀이3 - 내장함수 써보기
+n = int(input())
+price = 0
+
+for i in range(n):
+    dice = list(map(int, input().split()))
+    counts = Counter(dice).most_common()
+    money = 0
+
+    top_val, top_count = counts[0]
+
+    if top_count == 3:
+        money = 10000 + top_val * 1000
+    elif top_count == 2:
+        money = 1000 + top_val * 100
+    else:
+        money = max(dice) * 100
+
+    if money > price:
+        price = money
+
+print(price)
+
+'''
+# 내 풀이2
+n = int(input())
+price = 0
+
+def get_price(x: list[int]):
+    checker = [0] * 7
+
+    for v in x:
+        checker[v] += 1
+
+    for i, v in enumerate(checker):
+        if v == 3:
+            return 10000 + i * 1000
+        if v == 2:
+            return 1000 + i * 100
+
+    return max(checker) * 100
+
+
+for i in range(n):
+    dice_list = list(map(int, input().split()))
+    tmp = get_price(dice_list)
+
+    if price < tmp:
+        price = tmp
+
+print(price)
+'''
 
 '''
 # 내 풀이
@@ -42,6 +97,7 @@ for i in range(n):
 print(res)
 '''
 
+'''
 # 강사 풀이
 n = int(input())
 res = 0
@@ -62,5 +118,5 @@ for i in range(n):
     if money > res:
         res = money
 print(res)
-
+'''
 
