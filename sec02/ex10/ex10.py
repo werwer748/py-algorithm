@@ -13,6 +13,24 @@ OX 문제는 맞거나 틀린 두 경우의 답을 가지는 문제를 말한다
 import sys
 sys.stdin = open('in5.txt', 'rt')
 
+
+# 내 풀이 2
+n = int(input())
+ox_list = list(map(int, input().split()))
+point = 0
+res = 0
+
+for ox in ox_list:
+
+    if ox < 1:
+        point = 0
+    else:
+        point += 1
+        res += point
+
+print(res)
+
+
 '''
 # 내 풀이
 n = int(input())
@@ -29,6 +47,7 @@ for x in ox:
 print(res)
 '''
 
+'''
 # 강사 풀이
 n = int(input())
 a = list(map(int, input().split()))
@@ -42,3 +61,4 @@ for x in a:
     else:
         cnt = 0
 print(sum)
+'''
