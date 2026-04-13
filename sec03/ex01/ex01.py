@@ -9,6 +9,16 @@ sys.stdin = open("in5.txt", "rt")
 
 n = int(input())
 
+for i in range(n):
+    word = input().lower()
+    answer = "YES"
+
+    for j in range(len(word)):
+        if word[j] != word[-j - 1]:
+            answer = "NO"
+
+    print("#%d %s" % (i + 1, answer))
+
 '''
 # 내 풀이
 for i in range(n):
@@ -37,6 +47,7 @@ for i in range(n):
         print("#%d YES" % (i + 1))
 '''
 
+'''
 # 강사 풀이 2
 for i in range(n):
     s = input().upper()
@@ -45,3 +56,4 @@ for i in range(n):
         print("#%d YES" % (i + 1))
     else:
         print("#%d NO" % (i + 1))
+'''

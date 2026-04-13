@@ -10,7 +10,26 @@
 
 import sys
 import re
-sys.stdin = open("in1.txt", "rt")
+from math import sqrt
+
+sys.stdin = open("in5.txt", "rt")
+
+
+# 내 풀이 2
+n = int(re.sub('[^0-9]', '', input()))
+cnt = 0
+
+
+# for i in range(1, int(sqrt(n)) + 1):
+for i in range(1, int(n ** 0.5) + 1):
+    if n % i == 0:
+        if n // i == i:
+            cnt += 1
+        else:
+            cnt += 2
+
+print(n)
+print(cnt)
 
 '''
 # 내 풀이
@@ -31,6 +50,7 @@ print(res_num)
 print(res_cnt + 1)
 '''
 
+'''
 # 강사풀이
 
 s = input()
@@ -49,3 +69,4 @@ for i in range(1, res + 1):
     if res % i == 0:
         cnt += 1
 print(cnt)
+'''
