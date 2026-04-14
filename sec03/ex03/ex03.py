@@ -16,7 +16,22 @@
 주어진 구간의 순서대로 위의 규칙에 따라 순서를 뒤집는 작업을 연속해서 처리한 뒤 마지막 카드들의 배치 를 구하는 프로그램을 작성하시오.
 '''
 import sys
-sys.stdin = open("in1.txt", "rt")
+sys.stdin = open("in5.txt", "rt")
+
+
+# 내 풀이 2
+cards = list(range(21))
+
+for i in range(10):
+    s, e = map(int, input().split())
+    get_reverse = cards[s:e + 1]
+    get_reverse.reverse()
+
+    while s <= e:
+        cards[s] = get_reverse.pop(0)
+        s += 1
+
+print(*cards[1:])
 
 '''
 # 내 풀이
@@ -31,6 +46,8 @@ for i in range(10):
 print(" ".join(map(str, ary[1:])))
 '''
 
+
+'''
 a = list(range(21))
 
 for _ in range(10):
@@ -41,3 +58,4 @@ for _ in range(10):
 a.pop(0)
 for x in a:
     print(x, end=' ')
+'''
