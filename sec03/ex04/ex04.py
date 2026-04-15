@@ -4,7 +4,34 @@
 오름차순으로 정렬이 된 두 리스트가 주어지면 두 리스트를 오름차순으로 합쳐 출력하는 프로 그램을 작성하세요.
 '''
 import sys
-sys.stdin = open("in5.txt", "rt")
+sys.stdin = open("in1.txt", "rt")
+
+'''
+# 내 풀이 2
+n1 = int(input())
+a1 = list(map(int, input().split()))
+n2 = int(input())
+a2 = list(map(int, input().split()))
+
+res = []
+
+while a1 or a2:
+    if a1 and a2:
+        if a1[0] >= a2[0]:
+            res.append(a2.pop(0))
+            continue
+        if a2[0] >= a1[0]:
+            res.append(a1.pop(0))
+    if not a1 and a2:
+        res += a2
+        break
+    if not a2 and a1:
+        res += a1
+        break
+
+print(" ".join(map(str, res)))
+'''
+
 
 # 강사 풀이
 n = int(input())
@@ -17,19 +44,34 @@ p1 = p2 = 0
 c = []
 
 while p1 < n and p2 < m:
-    if a[p1] <= b[p2]:
-        c.append(a[p1])
-        p1 += 1
-    else:
+    if a[p1] >= b[p2]:
         c.append(b[p2])
         p2 += 1
-if p1 < n:
-    c = c + a[p1:]
-if p2 < m:
-    c = c + b[p2:]
+    else:
+        c.append(a[p1])
+        p1 += 1
 
-for x in c:
-    print(x, end=" ")
+if p1 < n:
+    c += a[p1:]
+if p2 < m:
+    c += b[p2:]
+
+print(" ".join(map(str, c)))
+
+#     if a[p1] <= b[p2]:
+#         c.append(a[p1])
+#         p1 += 1
+#     else:
+#         c.append(b[p2])
+#         p2 += 1
+# if p1 < n:
+#     c = c + a[p1:]
+# if p2 < m:
+#     c = c + b[p2:]
+#
+# for x in c:
+#     print(x, end=" ")
+
 
 '''
 # 내 풀이
