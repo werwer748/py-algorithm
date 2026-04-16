@@ -7,7 +7,7 @@ import sys
 sys.stdin = open("in1.txt", "rt")
 
 '''
-# 내 풀이 2
+# 내 풀이 2 - pop 들어가면 속도면에서 처진다
 n1 = int(input())
 a1 = list(map(int, input().split()))
 n2 = int(input())
