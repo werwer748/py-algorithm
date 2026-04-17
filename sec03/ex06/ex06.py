@@ -5,6 +5,31 @@ N*N의 격자판이 주어지면 각 행의 합, 각 열의합, 두 대각선의
 import sys
 sys.stdin = open("in5.txt", "rt")
 
+# 내 풀이2
+n = int(input())
+a = [list(map(int, input().split())) for _ in range(n)]
+b = [0] * n
+
+largest = -float("inf")
+
+l_dash = 0
+r_dash = 0
+
+for i in range(n):
+    now = a[i]
+    l_dash += a[i][i]
+    r_dash += a[i][n - i - 1]
+    row_sum = sum(now)
+    if row_sum > largest:
+        largest = row_sum
+    for j, x in enumerate(now):
+        b[j] += x
+
+b_max = max(b)
+print(max(l_dash, r_dash, largest, b_max))
+
+
+'''
 # 강사풀이
 n = int(input())
 a = [list(map(int, input().split())) for _ in range(n)]
@@ -30,6 +55,7 @@ if sum1 > largest:
 if sum2 > largest:
     largest = sum2
 print(largest)
+'''
 
 '''
 # 내 풀이
