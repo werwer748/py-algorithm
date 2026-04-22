@@ -2,12 +2,41 @@
 곳감(모래시계)
 '''
 import sys
-sys.stdin = open("in5.txt", "rt")
+sys.stdin = open("in4.txt", "rt")
 
 n = int(input())
 a = [list(map(int, input().split())) for _ in range(n)]
 m = int(input())
 
+# 내 풀이 2
+for i in range(m):
+    c, rl, d = map(int, input().split())
+    c -= 1
+    d %= n
+
+    if d != 0:
+        if rl > 0:
+            a[c] = a[c][-d:n] + a[c][:n - d]
+        else:
+            a[c] = a[c][d:] + a[c][:d]
+
+res = 0
+s = 0
+e = n
+
+for i in range(n):
+    for j in range(s, e):
+        res += a[i][j]
+    if i >= n // 2:
+        s -= 1
+        e += 1
+    else:
+        s += 1
+        e -= 1
+print(res)
+
+
+'''
 # 강사 풀이
 for i in range(m):
     h, t, k = map(int, input().split())
@@ -32,6 +61,8 @@ for i in range(n):
         s -= 1
         e += 1
 print(res)
+'''
+
 
 '''
 # 내 풀이
