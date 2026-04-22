@@ -4,6 +4,29 @@
 import sys
 sys.stdin = open("in5.txt", "rt")
 
+# 내풀이 2
+n = int(input())
+a = [[0] + list(map(int, input().split())) + [0] for _ in range(n)]
+a.insert(0, [0] * (n + 2))
+a.append([0] * (n + 2))
+
+cnt = 0
+dx = [-1, 0, 1, 0]
+dy = [0, -1, 0, 1]
+
+for i in range(1, n + 1):
+    for j in range(1, n + 1):
+        top = 1
+        for k in range(4):
+            if a[i][j] <= a[i + dx[k]][j + dy[k]]:
+                top = 0
+                break
+        cnt += top
+
+print(cnt)
+
+'''
+# 강사 풀이
 n = int(input())
 a = [list(map(int, input().split())) for _ in range(n)]
 a.insert(0, [0] * n)
@@ -23,6 +46,7 @@ for i in range(1, n + 1):
         if all(a[i][j] > a[i + dx[k]][j + dy[k]] for k in range(4)):
             cnt += 1
 print(cnt)
+'''
 
 '''
 # 내 풀이
