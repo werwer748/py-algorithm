@@ -2,8 +2,47 @@
 스도쿠 검사
 '''
 import sys
-sys.stdin = open("in1.txt", "rt")
+sys.stdin = open("in5.txt", "rt")
 
+'''
+# 내 풀이 2
+a = [list(map(int, input().split())) for _ in range(9)]
+res = "YES"
+circle = [-1, 0, 1]
+n = 9
+
+for i in range(n):
+    tmp1 = [0] * n
+    tmp2 = [0] * n
+    for j in range(n):
+        row = a[i][j] - 1
+        if tmp1[row] == 0:
+            tmp1[row] = 1
+        else:
+            res = "NO"
+        col = a[j][i] - 1
+        if tmp2[col] == 0:
+            tmp2[col] = 1
+        else:
+            res = "NO"
+        if i % 3 == 1 and j % 3 == 1:
+            tmp3 = [0] * n
+            for k in circle:
+                for l in circle:
+                    cir = a[i + k][j + l] - 1
+                    if tmp3[cir] == 0:
+                        tmp3[cir] = 1
+                    else:
+                        res = "NO"
+                        break
+        if res == "NO":
+            break
+    if res == "NO":
+        break
+print(res)
+'''
+
+'''
 # 강사 풀이
 def check(a):
     for i in range(9):
@@ -32,7 +71,7 @@ if check(a):
     print("YES")
 else:
     print("NO")
-
+'''
 
 '''
 # 내 풀이
