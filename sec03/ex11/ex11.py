@@ -2,11 +2,27 @@
 격자판 회문수
 '''
 import sys
-sys.stdin = open("in5.txt", "rt")
+sys.stdin = open("in1.txt", "rt")
 
-board = [list(map(str, input().split())) for _ in range(7)]
+n = 7
+board = [list(map(str, input().split())) for _ in range(n)]
 cnt = 0
 
+# 내 풀이2
+for i in range(n):
+    row = board[i]
+    for j in range(2, n-2):
+        if row[j-2] == row[j+2] and row[j-1] == row[j+1]:
+            cnt += 1
+    if 1 < i < n - 2:
+        for k in range(n):
+            if board[i - 2][k] == board[i + 2][k] and board[i - 1][k] == board[i + 1][k]:
+                cnt += 1
+
+print(cnt)
+
+
+'''
 # 강사 풀이
 for i in range(3):
     for j in range(7):
@@ -20,6 +36,7 @@ for i in range(3):
             cnt += 1
 
 print(cnt)
+'''
 
 '''
 # 내 풀이
