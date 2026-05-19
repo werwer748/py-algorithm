@@ -20,6 +20,28 @@ K는 1이상 10,000이하의 정수이고, N은 1이상 1,000,000이하의 정�
 import sys
 sys.stdin = open("in5.txt", "rt")
 
+# 내 풀이2
+k, n = map(int, input().split())
+lines = list(int(input()) for _ in range(k))
+
+lt = res = min(lines)
+rt = max(lines)
+
+while lt <= rt:
+    cnt = 0
+    mid = (lt + rt) // 2
+    for x in lines:
+        cnt += x // mid
+    if cnt < n:
+        rt = mid - 1
+    else:
+        lt = mid + 1
+        if mid > res:
+            res = mid
+
+print(res)
+
+'''
 # 강사 풀이
 k, n = map(int, input().split())
 Line = []
@@ -50,6 +72,7 @@ while lt <= rt:
         rt = mid - 1
 
 print(res)
+'''
 
 '''
 # 내 풀이
