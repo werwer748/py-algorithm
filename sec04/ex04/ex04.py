@@ -1,6 +1,6 @@
 """
 # 마구간 정하기(결정알고리즘)
-N개의 마구간이 수직선상에 있습니다. 각 마구간은 x1, x2, x3, ......, xN의 좌표를 가지며, 마 구간간에 좌표가 중복되는 일은 없습니다.
+N개의 마구간이 수직선상에 있습니다. 각 마구간은 x1, x2, x3, ......, xN의 좌표를 가지며, 마구간간에 좌표가 중복되는 일은 없습니다.
 현수는 C마리의 말을 가지고 있는데, 이 말들은 서로 가까이 있는 것을 좋아하지 않습니다. 각 마구간에는 한 마리의 말만 넣을 수 있고,
 가장 가까운 두 말의 거리가 최대가 되게 말을 마구간에 배치하고 싶습니다.
 C마리의 말을 N개의 마구간에 배치했을 때 가장 가까운 두 말의 거리가 최대가 되는 그 최대 값을 출력하는 프로그램을 작성하세요.
@@ -14,7 +14,42 @@ C마리의 말을 N개의 마구간에 배치했을 때 가장 가까운 두 말
 """
 
 import sys
-sys.stdin = open("in5.txt", "rt")
+sys.stdin = open("in3.txt", "rt")
+
+# 내 풀이2
+house, horse = map(int, input().split())
+dis = [int(input()) for _ in range(house)]
+dis.sort() # 굳이 정렬함수 직접 짜는것보다 있는거 활용하는게 좋다고 함
+res = 0
+
+lp = dis[0]
+rp = dis[house - 1]
+
+def horse_places(dis, mid):
+    cnt = 1
+    last_pos = dis[0]
+
+    for i in range(1, len(dis)):
+        if dis[i] - last_pos >= mid:
+            cnt += 1
+            last_pos = dis[i]
+
+        if cnt == horse:
+            break
+    return cnt == horse
+
+
+while lp <= rp:
+    mid = (lp + rp) // 2
+
+    if horse_places(dis, mid):
+        if res < mid:
+            res = mid
+        lp = mid + 1
+    else:
+        rp = mid - 1
+
+print(res)
 
 '''
 # 강사 풀이
@@ -46,6 +81,8 @@ while lt <= rt:
     else:
         rt = mid - 1
 print(res)
+'''
+
 '''
 # 내 풀이
 def i_sort(a):
@@ -91,3 +128,4 @@ while lt <= rt:
         rt = mid - 1
 
 print(res)
+'''
