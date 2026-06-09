@@ -14,42 +14,45 @@ C마리의 말을 N개의 마구간에 배치했을 때 가장 가까운 두 말
 """
 
 import sys
-sys.stdin = open("in3.txt", "rt")
+sys.stdin = open("in5.txt", "rt")
 
 # 내 풀이2
 house, horse = map(int, input().split())
 dis = [int(input()) for _ in range(house)]
 dis.sort() # 굳이 정렬함수 직접 짜는것보다 있는거 활용하는게 좋다고 함
 res = 0
-
-lp = dis[0]
+# lp = dis[0]
+lp = 1 # --> 무조건 0번쨰부터 다음번째의 거리가 최소라고 생각하면 안된다.
 rp = dis[house - 1]
 
-def horse_places(dis, mid):
+def mid_checker(mid):
+    # tmp = 0
+    last = dis[0] # --> 메모리 성능(언어에따라 차이), 실수 가능성 고려시!
     cnt = 1
-    last_pos = dis[0]
+    checker = False
 
-    for i in range(1, len(dis)):
-        if dis[i] - last_pos >= mid:
+    for i in range(1, house):
+        if mid <= dis[i] - last:
             cnt += 1
-            last_pos = dis[i]
-
-        if cnt == horse:
+            last = dis[i]
+        if cnt >= horse:
+            checker = True
             break
-    return cnt == horse
+    return checker
 
 
 while lp <= rp:
     mid = (lp + rp) // 2
 
-    if horse_places(dis, mid):
+    if mid_checker(mid):
+        lp = mid + 1
         if res < mid:
             res = mid
-        lp = mid + 1
     else:
         rp = mid - 1
 
 print(res)
+# 1 2 4 8 9
 
 '''
 # 강사 풀이
