@@ -16,8 +16,25 @@
 첫째 줄에 최대 사용할 수 있는 회의 수를 출력하여라.
 """
 import sys
-sys.stdin = open("in1.txt", "rt")
+sys.stdin = open("in5.txt", "rt")
 
+
+# 혼자 해보기
+meeting = int(input())
+time_table_list = [list(map(int, input().split())) for i in range(meeting)]
+time_table_list.sort(key=lambda x: [x[1], x[0]])
+end_time = 0
+res = 0
+
+for s, e in time_table_list:
+    if s >= end_time:
+        end_time = e
+        res += 1
+
+print(res)
+
+
+'''
 n = int(input()) # 회의의 갯수
 meeting = [] # 빈리스트
 
@@ -51,7 +68,7 @@ def quick_sort(m):
 #
 # end_time_list = [x for _, x in meeting]
 sorted_meeting = quick_sort(meeting)
-# print(sorted_meeting)
+print(sorted_meeting)
 
 endTime = 0
 cnt = 0
@@ -59,7 +76,9 @@ cnt = 0
 # for s, e in meeting:
 for s, e in sorted_meeting:
     if s >= endTime:
+        print(s, e)
         endTime = e
         cnt += 1
 
 print(cnt)
+'''
