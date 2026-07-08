@@ -17,7 +17,22 @@
 import sys
 sys.stdin = open("in.txt")
 
+# 내 풀이 4
+n = int(input())
+vol_list = [tuple(map(int, input().split())) for _ in range(n)]
+vol_list.sort(key=lambda x: (x[0], x[1]), reverse=True)
 
+pass_cnt = 0
+heavy = 0
+
+for h, w in vol_list:
+    if w > heavy:
+        heavy = w
+        pass_cnt += 1
+
+print(pass_cnt)
+
+'''
 # 강사 풀이
 n = int(input())
 body = [tuple(map(int, input().split())) for _ in range(n)]
@@ -31,6 +46,8 @@ for x, y in body:
         largest = y
         cnt += 1
 print(cnt)
+'''
+
 
 '''
 # 내 풀이
