@@ -15,7 +15,7 @@
 첫째 줄에 씨름 선수로 뽑히는 최대 인원을 출력하세요.
 """
 import sys
-sys.stdin = open("in.txt")
+sys.stdin = open("in5.txt")
 
 # 내 풀이 4
 n = int(input())

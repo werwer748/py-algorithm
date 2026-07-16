@@ -18,8 +18,43 @@
 M회의 높이 조정을 마친 후 가장 높은곳과 가장 낮은 곳의 차이를 출력하세요.
 """
 import sys
-sys.stdin = open("in1.txt")
+sys.stdin = open("in5.txt")
 
+# 내 풀이3 -> 별차이없다.
+l = int(input())
+a = list(map(int, input().split()))
+# a.sort()
+m = int(input())
+
+
+for _ in range(m):
+    big = max(a) - 1
+    small = min(a) + 1
+
+    big_idx = a.index(max(a))
+    small_idx = a.index(min(a))
+    a[big_idx] = big
+    a[small_idx] = small
+
+print(max(a) - min(a))
+
+
+'''
+# 내 풀이2
+l = int(input())
+l_list = list(map(int, input().split()))
+l_list.sort()
+m = int(input())
+
+for _ in range(m):
+    l_list[0] = l_list[0] + 1
+    l_list[l-1] = l_list[l-1] - 1
+    l_list.sort()
+
+print(l_list[l-1] - l_list[0])
+'''
+
+'''
 # 강사 풀이
 L = int(input())
 a = list(map(int, input().split()))
@@ -32,6 +67,7 @@ for _ in range(m):
     a[L - 1] -= 1
     a.sort()
 print(a[L - 1] - a[0])
+'''
 
 '''
 # 내 풀이
