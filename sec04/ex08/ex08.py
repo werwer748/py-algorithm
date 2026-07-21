@@ -14,12 +14,13 @@ N명의 승객 몸무게가 주어졌을 때 승객 모두가 탈출하기 위�
 첫째 줄에 구명보트의 최소 개수를 출력합니다.
 """
 import sys
-sys.stdin = open("in.txt")
+sys.stdin = open("in3.txt")
 
 # deque 활용하기
 from collections import deque
 
-n, limit = map(int, input().split())
+#내 풀이 2
+n, m = map(int, input().split())
 p = list(map(int, input().split()))
 p.sort()
 p = deque(p)
@@ -29,15 +30,16 @@ while p:
     if len(p) == 1:
         cnt += 1
         break
-    if p[0] + p[-1] > limit:
-        p.pop()
-        cnt += 1
-    else:
+
+    if p[0] + p[-1] <= m:
         p.popleft()
         p.pop()
         cnt += 1
-print(cnt)
+    else:
+        p.pop()
+        cnt += 1
 
+print(cnt)
 
 
 '''
