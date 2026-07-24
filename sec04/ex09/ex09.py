@@ -16,10 +16,46 @@
 
 ? 헷갈렸던거 정리!
 ? 주어진 수열(리스트_에서) 순서 유지하면서 증가하는 형태를 가진 배열을 만들라는 거였음... 아아
+? 더 이상 탐색하지않는다는 조건이 어디있다는...?
 """
 import sys
 sys.stdin = open("in3.txt")
 
+
+# 내 풀이2
+n = int(input())
+a = list(map(int, input().split()))
+
+res = []
+lp = 0
+rp = n - 1
+last = -float("inf")
+
+while lp <= rp:
+    tmp = []
+    if a[lp] > last:
+        tmp.append((a[lp], "L"))
+    if a[rp] > last:
+        tmp.append((a[rp], "R"))
+
+    if len(tmp) == 0:
+        break
+    tmp.sort()
+
+    res.append(tmp[0])
+    last = tmp[0][0]
+    if tmp[0][1] == "L":
+        lp += 1
+    else:
+        rp -= 1
+
+
+
+print(len(res))
+for _, direction in res:
+    print(direction, end="")
+
+'''
 # 내 풀이
 n = int(input())
 a = list(map(int, input().split()))
@@ -63,6 +99,7 @@ while lt <= rt:
 
 print(len(res))
 print(res)
+'''
 
 '''
 # 강사 풀이
