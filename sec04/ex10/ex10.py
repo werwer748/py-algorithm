@@ -17,8 +17,29 @@ n과 1부터 n까지의 수를 사용하여 이루어진 수열의 역수열이 
 원래 수열을 출력한다.
 """
 import sys
-sys.stdin = open("in3.txt")
+txt_file = '5'
+sys.stdin = open("in" + txt_file + ".txt")
 
+# 내 풀이 2
+n = int(input())
+a = list(map(int, input().split()))
+res = [0 for _ in range(n)]
+
+
+for i in range(n):
+    cnt = 0
+    for j in range(n):
+        if cnt == a[i] and res[j] == 0:
+            res[j] = i + 1
+            break
+        if res[j] == 0:
+            cnt += 1
+
+res = ' '.join(map(str, res))
+
+
+
+'''
 # 강사 풀이
 n = int(input())
 a = list(map(int, input().split()))
@@ -33,16 +54,7 @@ for i in range(n):
             a[i] -= 1
 
 res = "".join(list(map(str, seq)))
-
-sys.stdin = open("out3.txt")
-correct = "".join((input().split()))
-if res == correct:
-    print("OK")
-else:
-    print("FAIL")
-    print(res)
-    print(correct)
-
+'''
 
 
 '''
@@ -69,13 +81,14 @@ for i in range(n):
     seq[p] = i + 1
 
 res = "".join(list(map(str, seq)))
+'''
 
-sys.stdin = open("out5.txt")
-correct = "".join((input().split()))
+sys.stdin = open("out" + txt_file + ".txt")
+correct = " ".join((input().split()))
+# correct = (input().split())
 if res == correct:
     print("OK")
 else:
     print("FAIL")
     print(res)
     print(correct)
-'''
