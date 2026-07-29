@@ -16,8 +16,31 @@
 가장 큰 수를 출력합니다.
 """
 import sys
-sys.stdin = open("in4.txt")
+# sys.stdin = open("input.txt")
+# input()
+text_num = "5"
+sys.stdin = open("in" + text_num + ".txt")
 
+# 내 풀이2
+num, m = map(int, input().split())
+num = list(map(int, str(num)))
+comp = []
+cnt = 0
+
+for x in num:
+    while comp and cnt < m and comp[-1] < x:
+        comp.pop()
+        cnt += 1
+    comp.append(x)
+
+
+res = ''.join(map(str, comp[:len(comp) - max(0, m - cnt)]))
+# print(res)
+
+
+
+
+"""
 num, m = map(int, input().split())
 num = list(map(int, str(num)))
 
@@ -32,7 +55,7 @@ if m != 0:
     stack = stack[:m]
 res = ''.join(map(str, stack))
 print(res)
-
+"""
 
 '''
 # 내 풀이
@@ -58,8 +81,9 @@ for i in range(len(num)):
 
 res = "".join(map(str, stack))
 # print(res)
+'''
 
-sys.stdin = open("out4.txt")
+sys.stdin = open("out" + text_num + ".txt")
 correct = input()
 
 if res == correct:
@@ -68,7 +92,7 @@ else:
     print("FAIL")
     print("res:: ", res)
     print("correct:: ", correct)
-'''
+
 
 
 
