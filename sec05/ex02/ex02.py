@@ -17,8 +17,23 @@
 잘려진 조각의 총 개수를 나타내는 정수를 한 줄에 출력한다.
 """
 import sys
-sys.stdin = open("in5.txt", "r")
+sys.stdin = open("in1.txt", "r")
+a = input()
+stack = []
+cnt = 0
 
+for i, x in enumerate(a):
+    if x == "(":
+        stack.append(x)
+    else:
+        stack.pop()
+        cnt += len(stack) if a[i - 1] == "(" else 1
+print(cnt)
+
+
+
+
+'''
 # 강사 풀이
 s = input()
 stack = []
@@ -34,7 +49,7 @@ for i in range(len(s)):
         else:
             cnt += 1
 print(cnt)
-
+'''
 
 '''
 # 내 풀이
