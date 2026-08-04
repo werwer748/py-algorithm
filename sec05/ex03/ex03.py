@@ -15,11 +15,53 @@
 후위표기식을 출력한다.
 """
 import sys
+
 solution_num = "5"
 input_txt = 'in' + solution_num + ".txt"
 output_txt = 'out' + solution_num + ".txt"
 sys.stdin = open(input_txt)
 
+# 내 풀이2
+f = input()
+stack = []
+res = ''
+
+for x in f:
+    if x.isdigit():
+        res += x
+    else:
+        if x == ")":
+            while stack:
+                tmp = stack.pop()
+                if tmp != "(":
+                    res += tmp
+                else:
+                    break
+        else:
+            if x in ["*", "/"]:
+                while stack:
+                    tmp = stack[-1]
+                    if tmp == "*" or tmp == "/":
+                        res += stack.pop()
+                    else:
+                        break
+            elif x in ["+", "-"]:
+                while stack:
+                    tmp = stack[-1]
+                    if tmp != "(":
+                        res += stack.pop()
+                    else:
+                        break
+            stack.append(x)
+
+
+while stack:
+    res += stack.pop()
+
+
+
+
+'''
 # 강사 풀이
 a = input()
 stack = []
@@ -45,20 +87,7 @@ for x in a:
 
 while stack:
     res += stack.pop()
-
-
-sys.stdin = open(output_txt)
-correct = input().replace(" ", "")
-
-if res == correct:
-    print("SUCCESS")
-else:
-    print("FAIL")
-    print("res:: ", res)
-    print("correct:: ", correct)
-
-
-
+'''
 
 
 
@@ -90,6 +119,8 @@ for x in s:
                 break
 
 res += "".join(stack)
+'''
+
 
 sys.stdin = open(output_txt)
 correct = input().replace(" ", "")
@@ -100,4 +131,3 @@ else:
     print("FAIL")
     print("res:: ", res)
     print("correct:: ", correct)
-'''
