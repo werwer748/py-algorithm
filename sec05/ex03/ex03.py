@@ -62,7 +62,7 @@ while stack:
 
 
 '''
-# 강사 풀이
+# 강사 풀이 - 베스트 풀이
 a = input()
 stack = []
 res = ''
