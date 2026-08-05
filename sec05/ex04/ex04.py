@@ -14,6 +14,40 @@
 import sys
 sys.stdin = open("in5.txt")
 
+# 내 풀이2
+f = input()
+stack = []
+
+for x in f:
+    if x.isdecimal():
+        stack.append(int(x))
+    else:
+        last = stack.pop()
+        first = stack.pop()
+        if x == "+":
+            stack.append(first + last)
+        elif x == "-":
+            stack.append(first - last)
+        elif x == "*":
+            stack.append(first * last)
+        elif x == "/":
+            stack.append(first / last)
+
+print(stack[0])
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
 # 강사 풀이
 a = input()
 stack = []
@@ -39,7 +73,7 @@ for x in a:
             n2 = stack.pop()
             stack.append(n2 / n1)
 print(stack[0])
-
+'''
 
 '''
 # 내 풀이
