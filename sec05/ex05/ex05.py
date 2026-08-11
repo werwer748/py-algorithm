@@ -23,8 +23,22 @@ N과 K가 주어질 때 공주를 구하러 갈 왕자의 번호를 출력하는
 """
 import sys
 from collections import deque
-sys.stdin = open("in1.txt")
+sys.stdin = open("in5.txt")
 
+# 내 풀이2
+n, k = map(int, input().split())
+princes = deque(_ for _ in range(1, n + 1))
+
+while len(princes) > 1:
+    for i in range(k - 1):
+        p = princes.popleft()
+        princes.append(p)
+    princes.popleft()
+
+print(princes[0])
+
+
+'''
 # 강사 풀이
 n, k = map(int, input().split())
 dq = list(range(1, n + 1))
@@ -39,7 +53,7 @@ while dq:
     if len(dq) == 1:
         print(dq[0])
         dq.popleft()
-
+'''
 
 '''
 # 내 풀이
