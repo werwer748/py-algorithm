@@ -35,18 +35,6 @@ for x in f:
 
 print(stack[0])
 
-
-
-
-
-
-
-
-
-
-
-
-
 '''
 # 강사 풀이
 a = input()
