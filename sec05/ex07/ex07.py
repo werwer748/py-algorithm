@@ -22,8 +22,30 @@
 
 import sys
 from collections import deque
-sys.stdin = open("in2.txt")
+sys.stdin = open("in1.txt")
 
+# 내 풀이3
+req = list(input())
+n = int(input())
+
+for i in range(n):
+    q = deque(req[:])
+    plan = list(input())
+    res = 'YES'
+    his = []
+
+    for x in plan:
+        if q and q[0] != x:
+            his.append(x)
+
+        if q and q[0] == x and q[0] not in his:
+            q.popleft()
+    if q:
+        res = 'NO'
+
+    print("#%d %s" % (i + 1, res))
+
+'''
 # 강사 풀이
 need = input()
 n = int(input())
@@ -42,7 +64,7 @@ for i in range(n):
             print("#%d YES" % (i + 1))
         else:
             print("#%d NO" % (i + 1))
-
+'''
 
 '''
 # 내 풀이 2
