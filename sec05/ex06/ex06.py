@@ -21,8 +21,97 @@ M번째 환자가 몇 번째로 진료받는지 출력하세요.
 """
 import sys
 from collections import deque
-sys.stdin = open("in4.txt", "r")
+import heapq
+sys.stdin = open("in1.txt", "r")
 
+# 아이디어 검증
+n, m = map(int, input().split())
+patients = list(map(int, input().split()))
+
+# 대기 순서 유지
+q = deque((idx, risk) for idx, risk in enumerate(patients))
+
+# 남아 있는 환자들의 위험도를 관리
+# heap의 값은 음수로 넣어 max-heap처럼 사용
+heap = [(-risk, idx) for idx, risk in enumerate(patients)]
+heapq.heapify(heap)
+print(heap)
+treated = [False] * n
+print(treated)
+cnt = 0
+
+while q:
+    idx, risk = q.popleft()
+
+    # heap에서 이미 진료된 환자 제거
+    while heap and treated[heap[0][1]]:
+        heapq.heappop(heap)
+
+    # 가장 위험한 환자가 현재 환자가 아니면 뒤로 보냄
+    if heap and -heap[0][0] > risk:
+        q.append((idx, risk))
+        continue
+
+    cnt += 1
+    treated[idx] = True
+
+    if idx == m:
+        print(cnt)
+        break
+
+'''
+# 내 풀이 3
+n, m = map(int, input().split())
+patients = deque(
+    (pos == m, val) for pos, val in enumerate(
+        list(map(int, input().split()))
+    )
+)
+cnt = 0
+
+while True:
+    cur = patients.popleft()
+    danger_check = True
+
+    for pos, val in patients:
+        if cur[1] < val:
+            patients.append(cur)
+            danger_check = False
+            break
+
+    if danger_check:
+        cnt += 1
+        if cur[0]:
+            print(cnt)
+            break
+'''
+'''
+# 내 풀이2
+n, m = map(int, input().split())
+patients = list(map(int, input().split()))
+patients = deque((i, x) for i, x in enumerate(patients))
+very_danger = max(patients, key=lambda x: x[1])
+waiting = []
+
+while patients:
+    cur = patients.popleft()
+    if very_danger[1] > cur[1]:
+        patients.append(cur)
+    else:
+        waiting.append(cur)
+    if patients:
+        very_danger = max(patients, key=lambda x: x[1])
+
+
+print(waiting)
+for i, x in enumerate(waiting):
+    if x[0] == m:
+        print(i + 1)
+        break
+'''
+
+
+'''
 # 강사 풀이
 n, m = map(int, input().split())
 #* 리스트 컴프리헨션
@@ -41,6 +130,7 @@ while True:
         if cur[0] == m:
             break
 print(cnt)
+'''
 
 
 '''
