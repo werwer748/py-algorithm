@@ -6,8 +6,26 @@
 """
 
 import sys
-sys.stdin = open("in1.txt", "r")
+sys.stdin = open("in5.txt", "r")
 
+# 내 풀이2
+n = int(input())
+words = {input(): 0 for _ in range(n)}
+
+for _ in range(n - 1):
+    words[input()] = 1
+
+while words:
+    w = words.popitem()
+    if w[1] == 0:
+        print(w[0])
+        break
+
+
+
+
+'''
+# 강사 풀이
 n = int(input())
 p = dict()
 
@@ -23,9 +41,10 @@ for key, val in p.items():
     if val == 1:
         print(key)
         break
+'''
 
 '''
-# 딕셔너리 활용한 내 풀이
+# 내 풀이
 n = int(input())
 words = {input(): 1 for _ in range(n)}
 
