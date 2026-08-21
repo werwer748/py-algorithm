@@ -17,8 +17,59 @@ A(2), a(1), b(1), C(1), e(2)로 알파벳과 그 개수가 모두 일치합니�
 """
 
 import sys
-sys.stdin = open("in5.txt", "r")
+sys.stdin = open("in1.txt", "r")
 
+
+# 내 풀이3
+string1 = input()
+string2 = input()
+comp = dict()
+res = "YES"
+
+if len(string1) != len(string2):
+    res = "NO"
+
+for i in range(len(string1)):
+    x = string1[i]
+    y = string2[i]
+    comp[x] = comp.get(x, 0) + 1
+    comp[y] = comp.get(y, 0) - 1
+
+for k, v in comp.items():
+    if v != 0:
+        res = "NO"
+        break
+print(res)
+
+
+'''
+# 기본
+def alphabet_checker(strings):
+    str_dict = dict()
+    for x in strings:
+        if str_dict.get(x):
+            str_dict[x] += 1
+        else:
+            str_dict[x] = 1
+    return str_dict
+
+
+str_dict1 = alphabet_checker(string1)
+str_dict2 = alphabet_checker(string2)
+
+for item in str_dict1.items():
+    k, v = item
+    if str_dict2[k] == None or str_dict2[k] != v:
+        res = "NO"
+        break
+
+print(res)
+'''
+
+
+
+
+'''
 # C++ 처럼 리스트로만 풀어보기
 a = input()
 b = input()
@@ -44,6 +95,7 @@ for i in range(52):
         break
 else:
     print("YES")
+'''
 
 '''
 # 강사 풀이 2
