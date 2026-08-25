@@ -21,20 +21,89 @@
 
 import sys
 import heapq as hq
-sys.stdin = open("in5.txt")
+import math
 
+sys.stdin = open("in3.txt")
+
+"""
+핵심은 
+
+힙(Heap) 내부에서 위치를 이동하고(Loop), 대상을 지정하고(Assign), 반복 조건을 따질 때는 철저하게 '인덱스(주소/방 번호)'만 가지고 계산한다. 
+그러다가 실제로 크기를 비교해야 하는 '비교와 정렬의 순간'에만 그 인덱스를 사용해 실제 배열 안의 '노드 값(Value)'을 꺼내서 비교하는 것이다.
+"""
+
+'''
+# 직접 구현
+class MinHeap:
+    def __init__(self):
+        self.heap = [None]
+
+    def heap_push(self, val):
+        self.heap.append(val)
+        cur = len(self.heap) - 1
+        parent = math.trunc(cur / 2)
+
+        while cur > 1 and (self.heap[parent] > self.heap[cur]):
+            self.heap[parent], self.heap[cur] = self.heap[cur], self.heap[parent]
+            cur = parent
+            parent = math.trunc(cur / 2)
+
+    def heap_pop(self):
+        if len(self.heap) <= 1:
+            return None
+
+        hmin = self.heap[1]
+
+        if len(self.heap) == 2:
+            self.heap = [None]
+            return hmin
+
+        self.heap[1] = self.heap.pop()
+
+        cur = 1
+
+        while cur * 2 < len(self.heap):
+            left = cur * 2
+            right = left + 1
+            imin = left
+
+            if right < len(self.heap) and self.heap[right] < self.heap[left]:
+                imin = right
+
+            if self.heap[cur] <= self.heap[imin]:
+                break
+
+            self.heap[cur], self.heap[imin] = self.heap[imin], self.heap[cur]
+
+            cur = imin
+
+        return hmin
+
+arr = MinHeap()
+while True:
+    input_num = int(input())
+
+    if input_num == 0:
+        pop_num = arr.heap_pop()
+        print(pop_num)
+
+    if input_num < 0:
+        break
+    if input_num > 0:
+        arr.heap_push(input_num)
+'''
+
+# heapq 사용
 a = []
 
 while True:
-    n = int(input())
+    inp = int(input())
 
-    if n == -1:
+    if inp == 0:
+        pop_num = hq.heappop(a)
+        print(pop_num)
+
+    if inp < 0:
         break
-
-    if n == 0:
-        if len(a) == 0:
-            print("-1")
-        else:
-            print(hq.heappop(a))
-    else:
-        hq.heappush(a, n)
+    if inp > 0:
+        hq.heappush(a, inp)
