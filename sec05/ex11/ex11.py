@@ -19,28 +19,97 @@
 """
 import sys
 import heapq as hq
-sys.stdin = open("in5.txt", "r")
+from typing import List
+
+import math
+
+open_number = "5"
+sys.stdin = open("in" + open_number + ".txt", "r")
 
 # 콘솔 출력을 변수로 저장하기 위한 설정
 from io import StringIO
 output_capture = StringIO()
 sys.stdout = output_capture  # 표준 출력을 StringIO로 변경
 
-a = []
+'''
+# 직접 구현
+class MaxHeap:
+    def __init__(self):
+        self.heap = [None]
 
+    def heap_append(self, n: int):
+        self.heap.append(n)
+        cur = len(self.heap) - 1
+        parent = math.trunc(cur / 2)
+
+        while cur > 1 and self.heap[cur] > self.heap[parent]:
+            self.heap[cur], self.heap[parent] = self.heap[parent], self.heap[cur]
+            cur = parent
+            parent = math.trunc(cur / 2)
+
+    def heap_pop(self):
+        if len(self.heap) <= 1:
+            return None
+
+        max_num = self.heap[1]
+
+        if len(self.heap) == 2:
+            self.heap = [None]
+            return max_num
+
+        self.heap[1] = self.heap.pop()
+
+        cur = 1
+
+        while cur * 2 < len(self.heap):
+            left = cur * 2
+            right = left + 1
+            tmp = left
+
+            if right < len(self.heap) and self.heap[right] > self.heap[left]:
+                tmp = right
+
+            if self.heap[cur] > self.heap[tmp]:
+                break
+
+            self.heap[cur], self.heap[tmp] = self.heap[tmp], self.heap[cur]
+
+            cur = tmp
+
+        return max_num
+
+
+a = MaxHeap()
 while True:
     n = int(input())
 
-    if n == -1:
+    if n < 0:
         break
-
-    if n == 0:
-        if len(a) == 0:
-            print("-1")
+    elif n == 0:
+        pop_num = a.heap_pop()
+        if pop_num:
+            print(pop_num)
         else:
-            print(-(hq.heappop(a)))
+            print(-1)
+    else:
+        a.heap_append(n)
+'''
+
+
+# heapq 사용
+a = []
+while True:
+    n = int(input())
+
+    if n < 0:
+        break
+    elif n == 0:
+        max_pop = -1 if len(a) == 0 else -(hq.heappop(a))
+        print(max_pop)
     else:
         hq.heappush(a, -n)
+
+
 
 # 표준 출력을 원래대로 복원
 sys.stdout = sys.__stdout__
@@ -49,7 +118,7 @@ sys.stdout = sys.__stdout__
 console_output = output_capture.getvalue().strip().split("\n")
 
 # 정답 파일 불러오기
-with open("out5.txt", "r") as f:
+with open("out" + open_number + ".txt", "r") as f:
     correct_output = f.read().strip().split("\n")
 
 # 비교 및 결과 출력
