@@ -10,23 +10,43 @@
 단 공집합은 출력하지 않습니다.
 """
 import sys
-sys.stdin = open("in5.txt", "r")
+txt_num = "2"
+sys.stdin = open("in" + txt_num + ".txt", "r")
 
 # 콘솔 출력을 변수로 저장하기 위한 설정
 from io import StringIO
 output_capture = StringIO()
 sys.stdout = output_capture  # 표준 출력을 StringIO로 변경
 
-'''
+
+
+# 내 풀이 2
+n = int(input())
+def DFS(v: list[int], limit: int):
+    if limit > n:
+        res = ' '.join(map(str, v))
+        if len(v) > 0:
+            print(res)
+        return
+    v.append(limit)
+    DFS(v, limit + 1)
+    v.pop()
+    DFS(v, limit + 1)
+
+DFS([], 1)
+
+
+
+"""
 ## 강사 풀이
 def DFS(v):
     if v == n + 1:
         for i, x in enumerate(ch):
             if x == 1:
                 # 정답지처럼 출력하기용
-                # print(i, end=' ')
+                print(i, end=' ')
                 # 같은값 출력 확인용
-                print(i, end='')
+                # print(i, end='')
         print(end="\n")
     else:
         ch[v] = 1
@@ -34,10 +54,12 @@ def DFS(v):
         ch[v] = 0
         DFS(v + 1)
 
-# if __name__ == "__main__":
-n = int(input())
-ch = [0] * (n + 1)
-DFS(1)
+if __name__ == "__main__":
+    n = int(input())
+    ch = [0] * (n + 1)
+    DFS(1)
+"""
+
 '''
 n = int(input())
 a = []
@@ -58,17 +80,19 @@ def DFS(v, ary):
 
 
 DFS(1, a)
+'''
+
 
 
 # 표준 출력을 원래대로 복원
 sys.stdout = sys.__stdout__
 
-# 콘솔 출력 결과 가져오기
-console_output = output_capture.getvalue().strip().split("\n")
+# 콘솔 출력 결과 가져오기 (오른쪽 공백 제거하고 빈 줄 무시)
+console_output = [line.rstrip() for line in output_capture.getvalue().splitlines() if line.rstrip() != '']
 
-# 정답 파일 불러오기
-with open("out5.txt", "r") as f:
-    correct_output = f.read().strip().replace(" ", "").split("\n")
+# 정답 파일 불러오기 (오른쪽 공백 제거하고 빈 줄 무시)
+with open("out" + txt_num + ".txt", "r") as f:
+    correct_output = [line.rstrip() for line in f.read().splitlines() if line.rstrip() != '']
 
 # 비교 및 결과 출력
 if console_output == correct_output:
@@ -79,3 +103,4 @@ else:
     print("\n".join(console_output))
     print("=== 정답 파일 ===")
     print("\n".join(correct_output))
+
