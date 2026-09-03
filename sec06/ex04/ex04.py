@@ -8,9 +8,61 @@ N개의 원소로 구성된 자연수 집합이 주어지면, 이 집합을 두 
 16으로 같은 경우가 존재하는 것을 알 수 있다.
 """
 import sys
-from collections import deque
+
 sys.stdin = open("in4.txt")
 
+# 내 풀이2
+n = int(input())
+ary = list(map(int, input().split()))
+all_sum = sum(ary)
+res = 'NO'
+
+# 간단하게
+def DFS(v, s):
+    global res
+    if s > all_sum // 2:
+        return
+    if res == 'YES':
+        return
+    if v == n:
+        if s == all_sum - s:
+            res = 'YES'
+        return
+
+    DFS(v + 1, s + ary[v])
+    DFS(v + 1, s)
+
+DFS(0, 0)
+print(res)
+
+'''
+# 복잡하게..
+def DFS(v):
+    global res
+    if v == n:
+        if sum(check) != 0 and sum(check) < n:
+            o_p = 0
+            z_p = 0
+            for i, x in enumerate(check):
+                if x == 1:
+                    o_p += ary[i]
+                else:
+                    z_p += ary[i]
+            if o_p == z_p:
+                print('YES')
+                sys.exit(0)
+        return
+    check[v] = 1
+    DFS(v + 1)
+    check[v] = 0
+    DFS(v + 1)
+
+DFS(0)
+print('NO')
+'''
+
+"""
+# 강사 풀이
 def DFS(L, sum):
     if sum > total // 2:
         return
@@ -22,14 +74,13 @@ def DFS(L, sum):
         DFS(L + 1, sum + a[L])
         DFS(L + 1, sum)
 
-# 강사 풀이
 if __name__ == "__main__":
     n = int(input())
     a = list(map(int, input().split()))
     total = sum(a)
     DFS(0, 0)
     print("NO")
-
+"""
 
 
 '''
