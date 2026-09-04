@@ -15,7 +15,39 @@ N마리의 바둑이와 각 바둑이의 무게 W가 주어지면, 철수가 트
 """
 
 import sys
-sys.stdin = open("in5.txt")
+sys.stdin = open("in4.txt")
+c, n = map(int, input().split())
+dogs = [int(input()) for _ in range(n)]
+total = sum(dogs)
+res = 0
+
+# 내 풀이2
+def DFS(i, s, rest_sum):
+    global res
+    global total
+
+    if s > c:
+        return
+
+    if s + (total - rest_sum) < res:
+        return
+
+    if i == n:
+        if s > res and s < c:
+            res = s
+        return
+    DFS(i + 1, s + dogs[i], rest_sum + dogs[i])
+    DFS(i + 1, s, rest_sum + dogs[i])
+
+
+if total < c:
+    res = total
+else:
+    DFS(0, 0, 0)
+print(res)
+
+
+
 
 '''
 # 강사 풀이
@@ -49,7 +81,7 @@ DFS(0, 0, 0)
 print(result)
 '''
 
-
+'''
 # 내 풀이
 c, n = map(int, input().split())
 res = 0
@@ -79,3 +111,4 @@ def DFS(d, w_sum, tt):
 
 DFS(0, 0, 0)
 print(res)
+'''
