@@ -13,9 +13,33 @@
 import sys
 sys.stdin = open("in5.txt", "r")
 
-from io import StringIO
-output_capture = StringIO()
-sys.stdout = output_capture
+# from io import StringIO
+# output_capture = StringIO()
+# sys.stdout = output_capture
+
+n, m = map(int, input().split())
+res = [0] * m
+cnt = 0
+
+def DFS(l):
+    global res
+    global cnt
+
+    if l == m:
+        print(" ".join(map(str, res)))
+        cnt += 1
+        return
+    for i in range(1, n + 1):
+        res[l] = i
+        DFS(l + 1)
+
+
+DFS(0)
+print(cnt)
+
+
+
+
 
 '''
 # 강사 풀이
@@ -40,7 +64,7 @@ if __name__ == "__main__":
     print(cnt)
 '''
 
-
+'''
 # 내 풀이
 n, m = map(int, input().split())
 a = list(range(1, n + 1))
@@ -60,7 +84,9 @@ def DFS(v):
 
 DFS([])
 print(cnt)
+'''
 
+'''
 sys.stdout = sys.__stdout__
 console_output = output_capture.getvalue().strip().split("\n")
 
@@ -75,3 +101,4 @@ else:
     print("\n".join(console_output))
     print("=== 정답 파일 ===")
     print("\n".join(correct_output))
+'''
