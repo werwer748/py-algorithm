@@ -15,9 +15,9 @@ txt_num = "5"
 sys.stdin = open("in" + txt_num + ".txt", "r")
 
 # 콘솔 출력을 변수로 저장하기 위한 설정
-from io import StringIO
-output_capture = StringIO()
-sys.stdout = output_capture  # 표준 출력을 StringIO로 변경
+# from io import StringIO
+# output_capture = StringIO()
+# sys.stdout = output_capture  # 표준 출력을 StringIO로 변경
 
 # 내 풀이
 n, m = map(int, input().split())
@@ -35,41 +35,43 @@ def DFS(l):
 
     for i in range(1, n + 1):
         if blacklist[i] != 1:
-            res[l] = i
             blacklist[i] = 1
+            res[l] = i
             DFS(l + 1)
             blacklist[i] = 0
+
 DFS(0)
 print(cnt)
 
-
+'''
 # 강사 풀이
-# def DFS(l):
-#     global cnt
-#
-#     if l == m:
-#         for j in range(l):
-#             print(res[j], end=" ")
-#         print()
-#         cnt += 1
-#     else:
-#         for i in range(1, n + 1):
-#             if ch[i] == 0:
-#                 ch[i] = 1
-#                 res[l] = i
-#                 DFS(l + 1)
-#                 ch[i] = 0
-#
-#
-# if __name__ == "__main__":
-#     n, m = map(int, input().split())
-#     res = [0] * n
-#     ch = [0] * (n + 1)
-#     cnt = 0
-#     DFS(0)
-#     print(cnt)
+def DFS(l):
+    global cnt
+
+    if l == m:
+        for j in range(l):
+            print(res[j], end=" ")
+        print()
+        cnt += 1
+    else:
+        for i in range(1, n + 1):
+            if ch[i] == 0:
+                ch[i] = 1
+                res[l] = i
+                DFS(l + 1)
+                ch[i] = 0
 
 
+if __name__ == "__main__":
+    n, m = map(int, input().split())
+    res = [0] * n
+    ch = [0] * (n + 1)
+    cnt = 0
+    DFS(0)
+    print(cnt)
+'''
+
+"""
 # 표준 출력을 원래대로 복원
 sys.stdout = sys.__stdout__
 
@@ -89,3 +91,4 @@ else:
     print("\n".join(console_output))
     print("=== 정답 파일 ===")
     print("\n".join(correct_output))
+"""
