@@ -12,7 +12,28 @@
 """
 
 import sys
-sys.stdin = open("in1.txt")
+sys.stdin = open("in2.txt")
+
+
+# 내 풀이2
+n, m = map(int, input().split())
+res = [0] * m
+cnt = 0
+
+def DFS(l, s):
+    global cnt
+
+    if l == m:
+        print(" ".join(map(str, res)))
+        cnt += 1
+        return
+
+    for i in range(s, n + 1):
+        res[l] = i
+        DFS(l + 1, i + 1)
+
+DFS(0, 1)
+print(cnt)
 
 
 """
@@ -39,8 +60,9 @@ if __name__ == "__main__":
     print(cnt)
 """
 
-# n, m = map(int, input().split())
-n, m = 4, 2
+"""
+# 내 풀이 2
+n, m = map(int, input().split())
 res = [0] * m
 cnt = 0
 
@@ -61,3 +83,4 @@ def DFS(l, s):
 
 DFS(0, 1)
 print(cnt)
+"""
