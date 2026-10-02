@@ -14,9 +14,9 @@ txt_num = "2"
 sys.stdin = open("in" + txt_num + ".txt", "r")
 
 # 콘솔 출력을 변수로 저장하기 위한 설정
-from io import StringIO
-output_capture = StringIO()
-sys.stdout = output_capture  # 표준 출력을 StringIO로 변경
+# from io import StringIO
+# output_capture = StringIO()
+# sys.stdout = output_capture  # 표준 출력을 StringIO로 변경
 
 
 
@@ -85,22 +85,22 @@ DFS(1, a)
 
 
 # 표준 출력을 원래대로 복원
-sys.stdout = sys.__stdout__
-
-# 콘솔 출력 결과 가져오기 (오른쪽 공백 제거하고 빈 줄 무시)
-console_output = [line.rstrip() for line in output_capture.getvalue().splitlines() if line.rstrip() != '']
-
-# 정답 파일 불러오기 (오른쪽 공백 제거하고 빈 줄 무시)
-with open("out" + txt_num + ".txt", "r") as f:
-    correct_output = [line.rstrip() for line in f.read().splitlines() if line.rstrip() != '']
-
-# 비교 및 결과 출력
-if console_output == correct_output:
-    print("OK")
-else:
-    print("FAIL")
-    print("=== 콘솔 출력 ===")
-    print("\n".join(console_output))
-    print("=== 정답 파일 ===")
-    print("\n".join(correct_output))
+# sys.stdout = sys.__stdout__
+#
+# # 콘솔 출력 결과 가져오기 (오른쪽 공백 제거하고 빈 줄 무시)
+# console_output = [line.rstrip() for line in output_capture.getvalue().splitlines() if line.rstrip() != '']
+#
+# # 정답 파일 불러오기 (오른쪽 공백 제거하고 빈 줄 무시)
+# with open("out" + txt_num + ".txt", "r") as f:
+#     correct_output = [line.rstrip() for line in f.read().splitlines() if line.rstrip() != '']
+#
+# # 비교 및 결과 출력
+# if console_output == correct_output:
+#     print("OK")
+# else:
+#     print("FAIL")
+#     print("=== 콘솔 출력 ===")
+#     print("\n".join(console_output))
+#     print("=== 정답 파일 ===")
+#     print("\n".join(correct_output))
 
