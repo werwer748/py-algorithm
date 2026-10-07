@@ -14,7 +14,8 @@ N개의 정수가 주어지면 그 숫자들 중 K개를 뽑는 조합의 합이
 """
 
 import sys
-sys.stdin = open("in3.txt")
+sys.stdin = open("in5.txt")
+
 
 # 내 풀이2
 n, k = map(int, input().split())
@@ -34,10 +35,8 @@ def DFS(l, ai, s):
     for i in range(ai, n):
         DFS(l + 1, i + 1, s + a[i])
 
-
 DFS(0, 0, 0)
 print(cnt)
-
 
 """
 # 강사 풀이
