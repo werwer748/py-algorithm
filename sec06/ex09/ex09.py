@@ -19,8 +19,60 @@
 """
 import sys
 import math
-sys.stdin = open("in5.txt")
+import itertools as it
+sys.stdin = open("in1.txt")
 
+
+"""
+# 라이브러리로 풀어보기
+n, f = map(int, input().split())
+a = list(range(1, n + 1))
+b = [math.comb(n - 1, r) for r in range(n)]
+
+# for tmp in it.permutations(a, 3): # a라는 배열에서 3개씩 뽑는 경우의 수
+for tmp in it.permutations(a):
+    s = 0
+
+    for i, x in enumerate(tmp):
+        s += (x * b[i])
+    if s == f:
+        print(" ".join(map(str, tmp)))
+        break
+"""
+
+
+# 내 풀이 2
+n, f = map(int, input().split())
+a = [0] * n
+b = [1] * n
+blacklist = [0] * (n + 1)
+the_end = False
+for i in range(1, n):
+    b[i] = b[i - 1] * (n - i) // i
+
+def DFS(l, s):
+    global the_end
+
+    if the_end:
+        return
+
+    if l == n:
+        if s == f:
+            print(" ".join(map(str, a)))
+            the_end = True
+        return
+
+    for i in range(1, n + 1):
+        if blacklist[i] != 1:
+            blacklist[i] = 1
+            a[l] = i
+            DFS(l + 1, s + i * b[l])
+            blacklist[i] = 0
+DFS(0, 0)
+
+
+"""
+# 강사 풀이
 def DFS(l, s):
     if l == n and s == f:
         for x in p:
@@ -36,7 +88,7 @@ def DFS(l, s):
                 ch[i] = 0
 
 
-# 강사 풀이
+
 if __name__ == "__main__":
     n, f = map(int, input().split())
     p = [0] * n
@@ -44,14 +96,16 @@ if __name__ == "__main__":
     ch = [0] * (n + 1)
 
     for i in range(1, n):
+        print(i)
         b[i] = b[i - 1] * (n - i) // i
+    print(b)
     DFS(0, 0)
+"""
 
 
 
 """
 # 내 풀이
-# n, f = 4, 16
 n, f = map(int, input().split())
 a = [0] * n
 b = [math.comb(n - 1, r) for r in range(n)]
