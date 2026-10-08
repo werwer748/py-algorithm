@@ -14,9 +14,24 @@ N개의 정수가 주어지면 그 숫자들 중 K개를 뽑는 조합의 합이
 """
 
 import sys
+import itertools as it
 sys.stdin = open("in5.txt")
 
 
+# 라이브러리 사용하기
+n, k = map(int, input().split())
+a = list(map(int, input().split()))
+m = int(input())
+a_set = set()
+cnt = 0
+
+for x in it.combinations(a, k): # 조합뽑기는 combination
+    if sum(x) % m == 0:
+        cnt += 1
+
+print(cnt)
+
+"""
 # 내 풀이2
 n, k = map(int, input().split())
 a = list(map(int, input().split()))
@@ -37,6 +52,7 @@ def DFS(l, ai, s):
 
 DFS(0, 0, 0)
 print(cnt)
+"""
 
 """
 # 강사 풀이
